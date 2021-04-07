@@ -58,6 +58,14 @@ PS1="$PROMPT_USER_COLOR\u$PROMPT_SSH $blue\w$reset $PROMPT_SYMBOL "
 # The ubiquitous 'll': directories first, with alphanumeric sorting
 alias ll="ls -lv --group-directories-first --ignore=.." # show long listing but no hidden dotfiles except "."
 alias la='ls -lav' 
+
+alias rm='rm --interactive --verbose'
+alias mv='mv --interactive --verbose'
+alias cp='cp --verbose --interactive'
+
+alias wget='wget -c'
+alias dmesg='dmesg -T'
+alias grep='grep --color'
 alias vi='/usr/bin/vim'
 
 #----------------------------------------------------------------------------

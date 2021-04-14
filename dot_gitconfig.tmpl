@@ -3,6 +3,8 @@
 	name = {{ .git_alias }}
 [pull]
 	rebase = false
+[push]
+        default = current
 [alias]
   a = add
   c = commit
@@ -17,3 +19,5 @@
   p = push -u origin
   pu = pull
   s = status
+[include]
+  path = ~/.gitconfig_custom.inc

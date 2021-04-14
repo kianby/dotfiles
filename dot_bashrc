@@ -14,6 +14,22 @@
 bind '"\e[A":history-search-backward'
 bind '"\e[B":history-search-forward'
 
+# don't put duplicate lines or lines starting with space in the history.
+# See bash(1) for more options
+HISTCONTROL=ignoreboth
+
+# append to the history file, don't overwrite it
+shopt -s histappend
+
+# for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
+HISTSIZE=1000
+HISTFILESIZE=2000
+
+# check the window size after each command and, if necessary,
+# update the values of LINES and COLUMNS.
+shopt -s checkwinsize
+
+
 # ---------------------------------------------------------------------------
 #  EDITOR
 # ---------------------------------------------------------------------------
@@ -68,6 +84,8 @@ alias dmesg='dmesg -T'
 alias grep='grep --color'
 alias vi='/usr/bin/vim'
 
+alias serve="python3 -m $(python3 -c 'import sys; print("http.server" if sys.version_info[:2] > (2,7) else "SimpleHTTPServer")')"
+
 #----------------------------------------------------------------------------
 
 if [ -f "$HOME/.bash-git-prompt/gitprompt.sh" ]; then
@@ -88,3 +106,12 @@ fi
 if [ -f "$HOME/.pythonz/pythons/CPython-3.9.1/bin/pew" ]; then
     source "$(pew shell_config)"
 fi
+
+# -------------------------------------------------------------
+# Source all .bashrc files
+# -------------------------------------------------------------
+
+for file in ~/.bashrc.d/*.bashrc; do
+        . "$file"
+done
+

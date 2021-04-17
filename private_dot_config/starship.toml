@@ -7,4 +7,7 @@ diverged = "⇕⇡${ahead_count}⇣${behind_count}"
 behind = "⇣${count}"
 staged = '[+${count}](green)'
 
-
+[directory]
+truncation_length = 5
+truncation_symbol = "…/"
+truncate_to_repo = false

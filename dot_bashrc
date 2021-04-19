@@ -114,7 +114,7 @@ fi
 # Source all .bashrc files
 # -------------------------------------------------------------
 
-if [ -d "$DIRECTORY" ]; then
+if [ -d "$HOME/.bashrc.d/" ]; then
     for file in ~/.bashrc.d/*.bashrc; do
             . "$file"
     done

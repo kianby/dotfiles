@@ -1,0 +1,17 @@
+
+# set var
+alias cdd='cd {{ .deploydir }}'
+
+# maven
+if [ -f "{{ .java_truststore_file }}" ]; then
+    alias m='mvn -Djavax.net.ssl.trustStore={{ .java_truststore_file }} -Djavax.net.ssl.trustStorePassword={{ .java_truststore_password }}'
+else
+    alias m='mvn'
+fi
+alias mvnp='m -Dmaven.test.skip -Dmaven.javadoc.skip=true clean package'
+alias mvnd='m -Dmaven.test.skip -Dmaven.javadoc.skip=true deploy -P profile-nexus'
+alias mvni='m -Dmaven.test.skip -Dmaven.javadoc.skip=true clean install'
+
+# copy maven artifact
+alias d='python3 ~/bin/deploy.py'
+

@@ -1,0 +1,15 @@
+# fzf
+source ~/.fzf-completion.bash
+source ~/.fzf-keybindings.bash
+
+export FZF_DEFAULT_COMMAND="fdfind . "
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+export FZF_ALT_C_COMMAND="fdfind -t d ."
+export FZF_DEFAULT_OPTS='--height 40% --reverse --border'
+# do not use **<TAB> but something else
+# export FZF_COMPLETION_TRIGGER=''
+
+# quickly find a project
+p(){
+    cd {{ .projectdir }} &&  `__fzf_cd__`
+}

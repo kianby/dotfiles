@@ -73,6 +73,8 @@ else
 
   if [ -f "$HOME/.bash-git-prompt/gitprompt.sh" ]; then
       GIT_PROMPT_ONLY_IN_REPO=1
+      GIT_PROMPT_IGNORE_SUBMODULES=1
+      GIT_PROMPT_WITH_VIRTUAL_ENV=0
       GIT_PROMPT_THEME=Solarized_Yax
       source $HOME/.bash-git-prompt/gitprompt.sh
   fi

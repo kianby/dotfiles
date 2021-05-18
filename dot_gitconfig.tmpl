@@ -10,16 +10,13 @@
   b = "!git checkout $(git branch | fzf)"
   c = commit
   cd = checkout develop
-  cl = clone
   cm = checkout master
-  co = checkout
   cp = cherry-pick
   f = fetch
   fo = fetch origin
   m = merge
   nb = checkout -b
   p = push -u origin
-  pu = pull
   s = status
   track = "!for BRANCH in $(git branch -a | grep remotes | grep -v HEAD | grep -v master); do git branch --track \"${BRANCH#remotes/origin/}\" \"${BRANCH}\"; done"
 [include]

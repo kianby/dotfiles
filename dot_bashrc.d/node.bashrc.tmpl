@@ -4,14 +4,15 @@ if [ -f "{{ .extra_ca_cert }}" ]; then
 fi
 export NODE_BUILD_CURL_OPTS=--insecure
 
-# Nodenv (https://github.com/nodenv/nodenv)
-export PATH="$HOME/.nodenv/bin:$PATH"
-eval "$(nodenv init -)"
+if [ -d "$HOME/.nvm" ]; then
+    # Nodenv (https://github.com/nodenv/nodenv)
+    export PATH="$HOME/.nodenv/bin:$PATH"
+    eval "$(nodenv init -)"
 
-# NVM (https://github.com/nvm-sh/nvm)
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
+    # NVM (https://github.com/nvm-sh/nvm)
+    export NVM_DIR="$HOME/.nvm"
+    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+    [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+fi
 
 

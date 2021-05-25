@@ -7,17 +7,18 @@
         default = current
 [alias]
   a = add
+  ahead-of-master = log --oneline origin/master..HEAD
   b = "!git checkout $(git branch | fzf)"
   c = commit
   cd = checkout develop
   cm = checkout master
   cp = cherry-pick
   f = fetch
-  fo = fetch origin
   m = merge
   nb = checkout -b
   p = push -u origin
   s = status
   track = "!for BRANCH in $(git branch -a | grep remotes | grep -v HEAD | grep -v master); do git branch --track \"${BRANCH#remotes/origin/}\" \"${BRANCH}\"; done"
+  work-in-progress = rebase -i @{u}
 [include]
   path = ~/.gitconfig_custom.inc

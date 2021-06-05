@@ -117,6 +117,10 @@ fi
 # Source all .bashrc files
 # -------------------------------------------------------------
 
+if [ -d "$HOME/.local/bin" ]; then
+    export PATH=$HOME/.local/bin:$PATH
+fi
+
 if [ -d "$HOME/.bashrc.d/" ]; then
     for file in ~/.bashrc.d/*.bashrc; do
             . "$file"

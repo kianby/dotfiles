@@ -106,11 +106,15 @@ alias serve="python3 -m $(python3 -c 'import sys; print("http.server" if sys.ver
 [[ -s $HOME/.pythonz/etc/bashrc ]] && source $HOME/.pythonz/etc/bashrc
 
 if [ -f "$HOME/.pythonz/pythons/CPython-3.9.1/bin/python" ]; then
-    export PATH=$HOME/.pythonz/pythons/CPython-3.9.1/bin:$PATH
+    export PATH="$HOME/.pythonz/pythons/CPython-3.9.1/bin:$PATH"
 fi
 
 if [ -f "$HOME/.pythonz/pythons/CPython-3.9.1/bin/pew" ]; then
     source "$(pew shell_config)"
+fi
+
+if [ -d "$HOME/.poetry/bin" ]; then
+    export PATH="$HOME/.poetry/bin:$PATH"
 fi
 
 # -------------------------------------------------------------
@@ -118,7 +122,7 @@ fi
 # -------------------------------------------------------------
 
 if [ -d "$HOME/.local/bin" ]; then
-    export PATH=$HOME/.local/bin:$PATH
+    export PATH="$HOME/.local/bin:$PATH"
 fi
 
 if [ -d "$HOME/.bashrc.d/" ]; then

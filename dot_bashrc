@@ -99,6 +99,9 @@ alias vi='/usr/bin/vim'
 
 alias serve="python3 -m $(python3 -c 'import sys; print("http.server" if sys.version_info[:2] > (2,7) else "SimpleHTTPServer")')"
 
+alias ta='tmux attach'
+alias tkill="for s in \$(tmux list-sessions | awk -F ':' '{print \$1}' | fzf); do tmux kill-session -t \$s; done;"
+
 # -------------------------------------------------------------
 # PYTHON 
 # -------------------------------------------------------------

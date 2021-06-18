@@ -33,11 +33,18 @@ shopt -s checkwinsize
 #  EDITOR
 # ---------------------------------------------------------------------------
 
-if [ -f "/usr/bin/vim" ]; then
+if [ -f "$HOME/.local/bin/nvim" ]; then
+  export EDITOR=$HOME/.local/bin/nvim
+  export SVN_EDITOR=$HOME/.local/bin/nvim
+  export GIT_EDITOR=$HOME/.local/bin/nvim
+  export VISUAL=$HOME/.local/bin/nvim
+  alias vi='$HOME/.local/bin/nvim'
+elif [ -f "/usr/bin/vim" ]; then
   export EDITOR=/usr/bin/vim
   export SVN_EDITOR=/usr/bin/vim
   export GIT_EDITOR=/usr/bin/vim
   export VISUAL=/usr/bin/vim
+  alias vi='/usr/bin/vim'
 fi
 
 # ---------------------------------------------------------------------------
@@ -95,7 +102,6 @@ alias cp='cp --verbose --interactive'
 alias wget='wget -c'
 alias dmesg='dmesg -T'
 alias grep='grep --color'
-alias vi='/usr/bin/vim'
 
 alias serve="python3 -m $(python3 -c 'import sys; print("http.server" if sys.version_info[:2] > (2,7) else "SimpleHTTPServer")')"
 

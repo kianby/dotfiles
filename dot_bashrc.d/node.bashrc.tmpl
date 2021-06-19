@@ -4,11 +4,13 @@ if [ -f "{{ .extra_ca_cert }}" ]; then
 fi
 export NODE_BUILD_CURL_OPTS=--insecure
 
-if [ -d "$HOME/.nvm" ]; then
+if [ -d "$HOME/.nodenv" ]; then
     # Nodenv (https://github.com/nodenv/nodenv)
     export PATH="$HOME/.nodenv/bin:$PATH"
     eval "$(nodenv init -)"
+fi
 
+if [ -d "$HOME/.nvm" ]; then
     # NVM (https://github.com/nvm-sh/nvm)
     export NVM_DIR="$HOME/.nvm"
     [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm

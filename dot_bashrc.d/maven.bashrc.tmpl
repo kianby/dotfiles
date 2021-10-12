@@ -1,6 +1,7 @@
 
-# set var
+# alias and set var
 alias cdd='cd {{ .deploydir }}'
+export cdd={{ .deploydir }}
 
 # maven
 if [ -f "{{ .java_truststore_file }}" ]; then

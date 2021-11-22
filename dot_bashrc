@@ -129,7 +129,7 @@ if [ -d "$HOME/.poetry/bin" ]; then
 fi
 
 # -------------------------------------------------------------
-# Source all .bashrc files
+# Source .bashrc.d files
 # -------------------------------------------------------------
 
 if [ -d "$HOME/.local/bin" ]; then

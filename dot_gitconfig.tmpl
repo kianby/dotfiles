@@ -21,6 +21,7 @@
   track = "!for BRANCH in $(git branch -a | grep remotes | grep -v HEAD); do git branch --track \"${BRANCH#remotes/origin/}\" \"${BRANCH}\"; done"
   untrack = "!for BRANCH in $(git branch | grep -v '*'); do git branch -D \"${BRANCH}\"; done"
   work-in-progress = rebase -i @{u}
+  refresh = "!git untrack && git gc && git f && git track"
 [include]
   path = ~/.gitconfig_custom.inc
 [credential]

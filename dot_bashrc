@@ -33,67 +33,68 @@ shopt -s checkwinsize
 #  EDITOR
 # ---------------------------------------------------------------------------
 
-if [ -f "$HOME/.local/bin/nvim" ]; then
-  export EDITOR=$HOME/.local/bin/nvim
-  export SVN_EDITOR=$HOME/.local/bin/nvim
-  export GIT_EDITOR=$HOME/.local/bin/nvim
-  export VISUAL=$HOME/.local/bin/nvim
-  alias vi='$HOME/.local/bin/nvim'
-elif [ -f "/usr/bin/vim" ]; then
-  export EDITOR=/usr/bin/vim
-  export SVN_EDITOR=/usr/bin/vim
-  export GIT_EDITOR=/usr/bin/vim
-  export VISUAL=/usr/bin/vim
-  alias vi='/usr/bin/vim'
+if hash nvim 2>/dev/null; then
+  export EDITOR=nvim
+elif hash vim 2>/dev/null; then
+  export EDITOR=vim
+elif hash vi 2>/dev/null; then 
+  export EDITOR=vi
+else
+  export EDITOR=nano
 fi
+
+export SVN_EDITOR=$EDITOR
+export GIT_EDITOR=$EDITOR
+export VISUAL=$EDITOR
+alias vi=$EDITOR
 
 # ---------------------------------------------------------------------------
 #  PROMPT
 # ---------------------------------------------------------------------------
 
-if [ -f "/usr/bin/starship" ]; then
-  eval "$(starship init bash)"
+# set a minimalist prompt
+red='\[\e[0;31m\]'      # Red
+green='\[\e[0;32m\]'    # Green
+blue='\[\e[0;34m\]'     # Bold Blue
+boldred='\[\e[1;31m\]'  # Bold Red
+reset='\[\e[0m\]'       # Text Reset
+
+if [ "$USER" = "root" ] ; then
+  # $bold$red
+  PROMPT_USER_COLOR=$boldred 
+  PROMPT_SYMBOL="#"
 else
-  # set a minimalist prompt
-  red='\[\e[0;31m\]'      # Red
-  green='\[\e[0;32m\]'    # Green
-  blue='\[\e[0;34m\]'     # Bold Blue
-  boldred='\[\e[1;31m\]'  # Bold Red
-  reset='\[\e[0m\]'       # Text Reset
+  PROMPT_USER_COLOR=$green
+  PROMPT_SYMBOL="$"
+fi
 
-  if [ "$USER" = "root" ] ; then
-    # $bold$red
-    PROMPT_USER_COLOR=$boldred 
-    PROMPT_SYMBOL="#"
-  else
-    PROMPT_USER_COLOR=$green
-    PROMPT_SYMBOL="$"
-  fi
+if [[ -n "$SSH_CLIENT$SSH2_CLIENT$SSH_TTY" ]] ; then
+  PROMPT_SSH="@\h"
+else
+  PROMPT_SSH=""
+fi
 
-  if [[ -n "$SSH_CLIENT$SSH2_CLIENT$SSH_TTY" ]] ; then
-    PROMPT_SSH="@\h"
-  else
-    PROMPT_SSH=""
-  fi
+PS1="$PROMPT_USER_COLOR\u$PROMPT_SSH $blue\w$reset $PROMPT_SYMBOL "
 
-  PS1="$PROMPT_USER_COLOR\u$PROMPT_SSH $blue\w$reset $PROMPT_SYMBOL "
-
-  if [ -f "$HOME/.bash-git-prompt/gitprompt.sh" ]; then
-      GIT_PROMPT_ONLY_IN_REPO=1
-      GIT_PROMPT_IGNORE_SUBMODULES=1
-      GIT_PROMPT_WITH_VIRTUAL_ENV=0
-      GIT_PROMPT_THEME=Solarized_Yax
-      source $HOME/.bash-git-prompt/gitprompt.sh
-  fi
+if [ -f "$HOME/.bash-git-prompt/gitprompt.sh" ]; then
+    GIT_PROMPT_ONLY_IN_REPO=1
+    GIT_PROMPT_IGNORE_SUBMODULES=1
+    GIT_PROMPT_WITH_VIRTUAL_ENV=0
+    GIT_PROMPT_THEME=Solarized_Yax
+    source $HOME/.bash-git-prompt/gitprompt.sh
 fi
 
 # ---------------------------------------------------------------------------
 #  ALIASES
 # ---------------------------------------------------------------------------
 
-# The ubiquitous 'll': directories first, with alphanumeric sorting
-alias ll="ls -lv --group-directories-first --ignore=.." # show long listing but no hidden dotfiles except "."
-alias la='ls -lav' 
+if hash exa 2>/dev/null; then
+  alias ll="exa --long --group-directories-first --classify --git"
+  alias la="ll --all"
+else
+  alias ll="ls -lv --group-directories-first --ignore=.." # show long listing but no hidden dotfiles except "."
+  alias la='ls -lav' 
+fi
 
 alias rm='rm --interactive --verbose'
 alias mv='mv --interactive --verbose'

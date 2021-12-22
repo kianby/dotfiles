@@ -16,21 +16,14 @@ p(){
 
 
 # open any file with default editor (or vim if none)
-fzvim() {
+fze() {
   IFS=$'\n' files=($(fzf --query="$1" --multi --select-1 --exit-0))
   [[ -n "$files" ]] && ${EDITOR:-vim} "${files[@]}"
 }
 
-
-# open any file with vscode
-fzcode() {
-  IFS=$'\n' files=($(fzf --query="$1" --multi --select-1 --exit-0))
-  [[ -n "$files" ]] && code "${files[@]}"
-}
-
 # grep with silver searcher (https://github.com/ggreer/the_silver_searcher)
 # install debian : sudo apt-get install silversearcher-ag
-vg() {
+fzg() {
   local file
   local line
 
@@ -38,6 +31,6 @@ vg() {
 
   if [[ -n $file ]]
   then
-     vim $file +$line
+     ${EDITOR:-vim} $file +$line
   fi
 }

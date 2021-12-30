@@ -111,6 +111,10 @@ alias tkill="for s in \$(tmux list-sessions | awk -F ':' '{print \$1}' | fzf); d
 
 alias tiga='tig --all'
 
+if hash fd 2>/dev/null; then
+  alias fdfind='fd'
+fi
+
 # -------------------------------------------------------------
 # Source .bashrc.d files
 # -------------------------------------------------------------

@@ -2,14 +2,12 @@
 # PYTHON
 # -------------------------------------------------------------
 
-[[ -s $HOME/.pythonz/etc/bashrc ]] && source $HOME/.pythonz/etc/bashrc
-
-if [ -f "$HOME/.pythonz/pythons/CPython-3.9.9/bin/python" ]; then
-    export PATH="$HOME/.pythonz/pythons/CPython-3.9.9/bin:$PATH"
-fi
-
-if [ -f "$HOME/.pythonz/pythons/CPython-3.9.9/bin/pew" ]; then
-    source "$(pew shell_config)"
+# pyenv
+if [ -d "$HOME/.pyenv" ]; then
+    export PYENV_ROOT="$HOME/.pyenv"
+    export PATH="$PYENV_ROOT/bin:$PATH"    # if `pyenv` is not already on PATH
+    eval "$(pyenv init --path)"
+    eval "$(pyenv init -)"
 fi
 
 if [ -d "$HOME/.poetry/bin" ]; then

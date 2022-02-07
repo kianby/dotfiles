@@ -34,3 +34,9 @@
   helper = store
 [credential "https://github.com"]
   helper = cache
+[mergetool "meld"]
+  cmd = meld "$LOCAL" "$MERGED" "$REMOTE" --output "$MERGED"
+[merge]
+  tool = meld
+
+

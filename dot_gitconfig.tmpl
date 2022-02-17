@@ -10,6 +10,7 @@
   ahead-of-master = log --oneline origin/master..HEAD
   b = "!git checkout $(git branch | fzf)"
   c = commit
+  clear = clean -fd
   cd = checkout develop
   cm = checkout master
   cp = cherry-pick

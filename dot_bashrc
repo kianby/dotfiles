@@ -115,6 +115,10 @@ if hash fd 2>/dev/null; then
   alias fdfind='fd'
 fi
 
+if command -v most > /dev/null 2>&1; then
+    export PAGER="most"
+fi
+
 # -------------------------------------------------------------
 # Source .bashrc.d files
 # -------------------------------------------------------------

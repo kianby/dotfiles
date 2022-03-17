@@ -163,7 +163,7 @@ EOF
 endif
 
 " do not set if urxvt is properly configured
-colorscheme solarized8_dark
+colorscheme nord
 
 " highlight current line 
 set cursorline

@@ -4,3 +4,6 @@ bind status P !git p
 # Delete file
 bind status D !@?rm %(file)
 
+# Copy commit id
+bind generic I <!sh -c "echo %(commit)"
+

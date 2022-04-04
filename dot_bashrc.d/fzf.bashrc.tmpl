@@ -11,7 +11,7 @@ export FZF_DEFAULT_OPTS='--height 40% --reverse --border'
 
 # quickly find a project
 p(){
-    cd {{ .projectdir }} &&  `__fzf_cd__`
+    cd {{ .projectdir }} &&  `__fzf_cd__` && [[ -d ".git" ]] && git fetch 
 }
 
 

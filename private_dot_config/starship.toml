@@ -6,5 +6,13 @@ truncation_length = 5
 truncation_symbol = "…/"
 truncate_to_repo = false
 
+[git_status]
+ahead = "⇡${count}"
+diverged = "⇕⇡${ahead_count}⇣${behind_count}"
+behind = "⇣${count}"
+
 [package]
+disabled = true
+
+[java]
 disabled = true

@@ -57,7 +57,7 @@ alias vi=$EDITOR
 #  PROMPT
 # ---------------------------------------------------------------------------
 
-if [ -f "$HOME/.local/bin/starship" ]; then
+if hash starship 2>/dev/null; then
   eval "$(starship init bash)"
 else
   # set a minimalist prompt

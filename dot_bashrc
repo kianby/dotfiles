@@ -143,8 +143,9 @@ if [ -d "$HOME/.bashrc.d/" ]; then
     done
 fi
 
-# replace fzf history (CTRL-R) by https://atuin.sh
-if hash atuin 2>/dev/null; then
-  eval "$(atuin init bash)"
+# replace fzf history (CTRL-R) by https://github.com/cantino/mcfly
+if hash mcfly 2>/dev/null; then
+  eval "$(mcfly init bash)"
 fi
+
 

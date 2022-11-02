@@ -3,11 +3,16 @@
 My dot files managed by ChezMoi (https://github.com/twpayne/chezmoi)
 
 Friend tools:
-- tmux
-- tig
+- bash
+- tmux, tmuxp, tpm
+- tig, git
 - starship
+- vim or neovim, vundle
+- python
+- perl
+- fzf
 - mcfly
-- vim
+
 
 Configuration file *~/config/chezmoi/chezmoi.toml*
 

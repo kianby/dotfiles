@@ -2,6 +2,13 @@
 
 My dot files managed by ChezMoi (https://github.com/twpayne/chezmoi)
 
+Friend tools:
+- tmux
+- tig
+- starship
+- mcfly
+- vim
+
 Configuration file *~/config/chezmoi/chezmoi.toml*
 
 ```toml

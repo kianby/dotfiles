@@ -1,8 +1,10 @@
 # My dot files managed by [ChezMoi](https://github.com/twpayne/chezmoi)
 
+Built around Bash. Most supervitamined replacements like hishtory or exa stay optional.
+
 ## My friend programs
 
-- shell interpreter : bash and the prompt manager [starship](https://starship.rs/)
+- shell : bash, prompt manager [starship](https://starship.rs/), [Hishtory](https://github.com/ddworken/hishtory), [Exa](https://github.com/rivy/rust.exa)
 - terminal multiplexer: [tmux](https://github.com/tmux/tmux), plugin manager [tpm](https://github.com/tmux-plugins/tpm) and session manager [tmuxp](https://github.com/tmux-python/tmuxp) 
 - a swiss-knife to make life easier: [fzf](https://github.com/junegunn/fzf)
 - git: configuration and the terminal manager [tig](https://jonas.github.io/tig/) 

@@ -2,8 +2,8 @@
 
 ## My friend programs
 
-- shell interpreter : bash and the prompt manager starship
-- terminal multiplexer: tmux, tmuxp, tpm
+- shell interpreter : bash and the prompt manager [starship](https://starship.rs/)
+- terminal multiplexer: [tmux](https://github.com/tmux/tmux), plugin manager [tpm](https://github.com/tmux-plugins/tpm) and session manager [tmuxp](https://github.com/tmux-python/tmuxp) 
 - a swiss-knife to make life easier: [fzf](https://github.com/junegunn/fzf)
 - git: configuration and the terminal manager [tig](https://jonas.github.io/tig/) 
 - vim: vim or neovim, [vundle](https://github.com/VundleVim/Vundle.vim)

@@ -163,5 +163,11 @@ PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
 
 HISTFILE=~/.bash_history
 
+# Hishtory (https://github.com/ddworken/hishtory)
+if [ -d "$HOME/.hishtory/" ]; then  
+  export PATH="$PATH:$HOME/.hishtory"
+  source $HOME/.hishtory/config.sh
+fi
+
 # enable history
 set -o history

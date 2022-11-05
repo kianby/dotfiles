@@ -1,19 +1,18 @@
-# dotfiles
+# My dot files managed by [ChezMoi](https://github.com/twpayne/chezmoi)
 
-My dot files managed by ChezMoi (https://github.com/twpayne/chezmoi)
+## My friend programs
 
-Friend tools:
-- bash
-- tmux, tmuxp, tpm
-- tig, git
-- starship
-- vim or neovim, vundle
-- python
-- perl
-- sdkman
-- fzf
+- shell interpreter : bash and the prompt manager starship
+- terminal multiplexer: tmux, tmuxp, tpm
+- a swiss-knife to make life easier: [fzf](https://github.com/junegunn/fzf)
+- git: configuration and the terminal manager [tig](https://jonas.github.io/tig/) 
+- vim: vim or neovim, [vundle](https://github.com/VundleVim/Vundle.vim)
+- languages: python, perl, java with [sdkman](https://sdkman.io/) 
 
-Configuration file *~/config/chezmoi/chezmoi.toml*
+
+## Configuration file
+
+a sample file (located in *~/config/chezmoi/chezmoi.toml*)
 
 ```toml
 [data]

@@ -1,0 +1,33 @@
+#!/bin/bash
+
+_set_fzf_default_opts() {
+  local color00='#263238'
+  local color01='#2C393F'
+  local color04='#C9CCD3'
+  local color06='#D5DBE5'
+  local color0A='#FFCC00'
+  local color0C='#80CBC4'
+  local color0D='#89DDFF'
+
+  INFO_HEADER="<ESC> Exit, <PgUp> Preview up, <PgDown> Preview down"
+
+  export FZF_DEFAULT_OPTS="
+      --color=bg+:$color01,bg:$color00,spinner:$color0C,hl:$color0D
+      --color=fg:$color04,header:$color0D,info:$color0A,pointer:$color0C
+      --color=marker:$color0C,fg+:$color06,prompt:$color0A,hl+:$color0D
+      --cycle --border --layout=reverse-list --preview-window=right:wrap --bind pgdn:preview-down --bind pgup:preview-up --header \"$INFO_HEADER\""
+}
+
+_set_fzf_default_opts
+
+APP=$(flatpak list --columns=application --app | sort | uniq | fzf --prompt='Launch >') || exit 0
+
+#printf "/usr/bin/flatpak run --branch=stable --arch=x86_64 --file-forwarding $APP"
+#/usr/bin/flatpak run --branch=stable --arch=x86_64 --file-forwarding "$APP"
+
+#CMD="/usr/bin/flatpak run --branch=stable --arch=x86_64 --file-forwarding $APP"
+read -p "Arguments pour $APP :" arguments
+
+/usr/bin/flatpak run --branch=stable --arch=x86_64 --file-forwarding "$APP" "$arguments"
+
+

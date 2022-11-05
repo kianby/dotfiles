@@ -1,10 +1,10 @@
 # My dot files managed by [ChezMoi](https://github.com/twpayne/chezmoi)
 
-Built around Bash. Most supervitamined replacements like hishtory or exa stay optional.
+Built around Bash. Most supervitamined replacements stay optional.
 
 ## My friend programs
 
-- shell : bash, prompt manager [starship](https://starship.rs/), [Hishtory](https://github.com/ddworken/hishtory), [Exa](https://github.com/rivy/rust.exa)
+- shell : bash, [starship](https://starship.rs/) super prompt, [hishtory](https://github.com/ddworken/hishtory), [ls exa](https://github.com/rivy/rust.exa)
 - terminal multiplexer: [tmux](https://github.com/tmux/tmux), plugin manager [tpm](https://github.com/tmux-plugins/tpm) and session manager [tmuxp](https://github.com/tmux-python/tmuxp) 
 - a swiss-knife to make life easier: [fzf](https://github.com/junegunn/fzf)
 - git: configuration and the terminal manager [tig](https://jonas.github.io/tig/) 

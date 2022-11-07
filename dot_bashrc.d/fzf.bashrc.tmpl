@@ -1,36 +1,38 @@
 # fzf
-source ~/.fzf-completion.bash
-source ~/.fzf-keybindings.bash
+if hash fzf 2>/dev/null; then
+  source ~/.fzf-completion.bash
+  source ~/.fzf-keybindings.bash
 
-export FZF_DEFAULT_COMMAND="fdfind . "
-export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-export FZF_ALT_C_COMMAND="fdfind -t d ."
-export FZF_DEFAULT_OPTS='--height 40% --reverse --border'
-# do not use **<TAB> but something else
-# export FZF_COMPLETION_TRIGGER=''
+  export FZF_DEFAULT_COMMAND="fdfind . "
+  export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+  export FZF_ALT_C_COMMAND="fdfind -t d ."
+  export FZF_DEFAULT_OPTS='--height 40% --reverse --border'
+  # do not use **<TAB> but something else
+  # export FZF_COMPLETION_TRIGGER=''
 
-# quickly find a project
-p(){
-    cd {{ .projectdir }} &&  `__fzf_cd__` && [[ -d ".git" ]] && git fetch 
-}
+  # quickly find a project
+  p(){
+      cd {{ .projectdir }} &&  `__fzf_cd__` && [[ -d ".git" ]] && git fetch 
+  }
 
 
-# open any file with default editor (or vim if none)
-fze() {
-  IFS=$'\n' files=($(fzf --query="$1" --multi --select-1 --exit-0))
-  [[ -n "$files" ]] && ${EDITOR:-vim} "${files[@]}"
-}
+  # open any file with default editor (or vim if none)
+  fze() {
+    IFS=$'\n' files=($(fzf --query="$1" --multi --select-1 --exit-0))
+    [[ -n "$files" ]] && ${EDITOR:-vim} "${files[@]}"
+  }
 
-# grep with silver searcher (https://github.com/ggreer/the_silver_searcher)
-# install debian : sudo apt-get install silversearcher-ag
-fzg() {
-  local file
-  local line
+  # grep with silver searcher (https://github.com/ggreer/the_silver_searcher)
+  # install debian : sudo apt-get install silversearcher-ag
+  fzg() {
+    local file
+    local line
 
-  read -r file line <<<"$(ag --nobreak --noheading $@ | fzf -0 -1 | awk -F: '{print $1, $2}')"
+    read -r file line <<<"$(ag --nobreak --noheading $@ | fzf -0 -1 | awk -F: '{print $1, $2}')"
 
-  if [[ -n $file ]]
-  then
-     ${EDITOR:-vim} $file +$line
-  fi
-}
+    if [[ -n $file ]]
+    then
+      ${EDITOR:-vim} $file +$line
+    fi
+  }
+fi

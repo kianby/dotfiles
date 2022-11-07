@@ -1,4 +1,4 @@
-# Node
+# node
 if [ -f "{{ .extra_ca_cert }}" ]; then
     export NODE_EXTRA_CA_CERTS={{ .extra_ca_cert }}
 fi
@@ -16,5 +16,3 @@ if [ -d "$HOME/.nvm" ]; then
     [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
     [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 fi
-
-

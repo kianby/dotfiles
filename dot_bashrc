@@ -133,6 +133,8 @@ if hash nix-env 2>/dev/null; then
   alias nix-update='nix-channel --update && nix-env -u'
 fi
 
+alias cdd='cd {{ .deploydir }}'
+
 # ---------------------------------------------------------------------------
 #  COMPLETIONS
 # ---------------------------------------------------------------------------

@@ -1,8 +1,10 @@
-export DOCKER_COMPOSE_BIN='{{ .docker_compose_command }}'
-docker-compose ()
-{
-    $DOCKER_COMPOSE_BIN $(find -name 'docker-compose*.yml' -type f -perm -u+x -printf '%p\t%d\n'  2>/dev/null | sort -n -k2 | cut -f 1 | awk '{print "-f "$0}') $@
-}
-alias dcup='docker-compose --env-file .env up -d'
-alias dcdown='docker-compose --env-file .env down'
-
+# docker
+if docker tig 2>/dev/null; then
+    export DOCKER_COMPOSE_BIN='{{ .docker_compose_command }}'
+    docker-compose ()
+    {
+        $DOCKER_COMPOSE_BIN $(find -name 'docker-compose*.yml' -type f -perm -u+x -printf '%p\t%d\n'  2>/dev/null | sort -n -k2 | cut -f 1 | awk '{print "-f "$0}') $@
+    }
+    alias dcup='docker-compose --env-file .env up -d'
+    alias dcdown='docker-compose --env-file .env down'
+fi

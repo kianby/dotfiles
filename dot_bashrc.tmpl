@@ -134,6 +134,7 @@ if hash nix-env 2>/dev/null; then
 fi
 
 alias cdd='cd {{ .deploydir }}'
+export cdd={{ .deploydir }}
 
 # ---------------------------------------------------------------------------
 #  COMPLETIONS

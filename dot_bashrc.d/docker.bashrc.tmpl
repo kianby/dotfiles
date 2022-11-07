@@ -1,5 +1,5 @@
 # docker
-if docker tig 2>/dev/null; then
+if hash docker 2>/dev/null; then
     export DOCKER_COMPOSE_BIN='{{ .docker_compose_command }}'
     docker-compose ()
     {

@@ -178,6 +178,7 @@ HISTFILE=~/.bash_history
 if [ -d "$HOME/.hishtory/" ]; then  
   export PATH="$PATH:$HOME/.hishtory"
   source $HOME/.hishtory/config.sh
+  hishtory config-set displayed-columns CWD Command
 fi
 
 # enable history

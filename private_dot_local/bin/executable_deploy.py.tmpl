@@ -1,0 +1,57 @@
+#!/usr/bin/python3
+# -*- coding: UTF-8 -*-
+
+import os
+from shutil import copy2
+
+DEPLOY_DIRECTORY = "{{ .deploydir }}"
+
+
+def get_file_weight(filename):
+    if filename.endswith(".ear"):
+        return 4
+    elif filename.endswith(".war"):
+        return 3
+    elif filename.endswith(".zip"):
+        return 2
+    elif filename.endswith(".jar"):
+        return 1
+    else:
+        return 0
+
+
+def find_targets(path):
+    dest_path = path + "/target"
+    targets = []
+    if os.path.isdir(dest_path):
+        with os.scandir(dest_path) as it:
+            for entry in it:
+                weight = get_file_weight(entry.name)
+                if entry.is_file() and weight:
+                    target = (entry.path, weight)
+                    targets.append(target)
+    return targets
+
+
+def find_recursive_targets(path):
+    targets = []
+    with os.scandir(path) as it:
+        for entry in it:
+            if not entry.name.startswith(".") and entry.is_dir():
+                targets = targets + find_targets(entry.path)
+    targets = targets + find_targets(path)
+    return targets
+
+
+def process(path):
+    candidates = sorted(find_recursive_targets(path), key=lambda target: target[1], reverse=True)
+    if candidates:
+        filename, _ = candidates[0]
+        print("copie " + filename)  # + ' vers ' + DEPLOY_DIRECTORY)
+        copy2(filename, DEPLOY_DIRECTORY)
+    else:
+        print("impossible de déterminer l'archive à copier")
+
+
+if __name__ == "__main__":
+    process(".")

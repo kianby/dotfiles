@@ -31,9 +31,9 @@ a sample file (located in *~/config/chezmoi/chezmoi.toml*)
   java8_version = "8.0.302-open"
   java11_version = "11.0.12-open"
   # extra certificate for NodeJs (PEM file) to trust HTTPS proxy
-  extra_ca_cert = "/home/yannic/config/security/ca-node.pem"
+  extra_ca_cert = "~/config/security/ca-node.pem"
   # Java truststore for Maven to trust HTTPS proxy
-  java_truststore_file = "/home/yannic/config/security/snef-security.jks"
+  java_truststore_file = "~/config/security/extra-truststore.jks"
   java_truststore_password = "secret"
   # docker compose bin
   docker_compose_command = "/usr/bin/docker compose"

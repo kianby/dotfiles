@@ -136,6 +136,15 @@ fi
 alias cdd='cd {{ .deploydir }}'
 export cdd={{ .deploydir }}
 
+sshloop() {
+  while :
+  do
+    ssh $1
+    echo "Reconnection in 5 seconds"
+    sleep 5
+  done
+}
+
 # ---------------------------------------------------------------------------
 #  COMPLETIONS
 # ---------------------------------------------------------------------------

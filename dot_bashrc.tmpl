@@ -125,12 +125,12 @@ if hash fd 2>/dev/null; then
   alias fdfind='fd'
 fi
 
-if command -v most > /dev/null 2>&1; then
-    export PAGER="most"
-fi
-
 if hash nix-env 2>/dev/null; then
   alias nix-update='nix-channel --update && nix-env -u'
+
+  nix-search() {
+    nix-env -qa --description ".*$1.*"
+  }
 fi
 
 alias cdd='cd {{ .deploydir }}'

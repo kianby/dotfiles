@@ -1,0 +1,46 @@
+#!/usr/bin/env sh
+
+# Source: https://github.com/niedzielski/cb
+
+# If not sourced, set safety options.
+case "$0" in */cb) set -eu ;; esac
+
+case "${OSTYPE:-}$(uname)" in
+ [lL]inux*) ;;
+ [dD]arwin*) mac_os=1 ;;
+  [cC]ygwin) win_os=1 ;;
+          *) echo "Unknown operating system \"${OSTYPE:-}$(uname)\"." >&2; false ;;
+esac
+
+#is_wayland() { [ "$XDG_SESSION_TYPE" = 'wayland' ]; }
+is_wayland() { [ 1 -eq 0 ]; }
+is_mac() { [ ${mac_os-0} -ne 0 ]; }
+is_win() { [ ${win_os-0} -ne 0 ]; }
+
+if is_mac; then
+  alias cbcopy=pbcopy
+  alias cbpaste=pbpaste
+elif is_win; then
+  alias cbcopy=putclip
+  alias cbpaste=getclip
+else
+  if is_wayland; then
+    alias cbcopy=wl-copy
+    alias cbpaste=wl-paste
+  else
+    alias cbcopy='xclip -sel c'
+    alias cbpaste='xclip -sel c -o'
+  fi
+fi
+
+cb() {
+  if [ ! -t 0 ] && [ $# -eq 0 ]; then
+    # No stdin and no call for --help, blow away the current clipboard and copy.
+    cbcopy
+  else
+    cbpaste "$@"
+  fi
+}
+
+# If not sourced, execute.
+case "$0" in */cb) cb "$@" ;; esac

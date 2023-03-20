@@ -3,7 +3,7 @@ if hash docker 2>/dev/null; then
     export DOCKER_COMPOSE_BIN='{{ .docker_compose_command }}'
     docker-compose ()
     {
-        $DOCKER_COMPOSE_BIN $(find -name 'docker-compose*.yml' -type f -perm -u+x -printf '%p\t%d\n'  2>/dev/null | sort -n -k2 | cut -f 1 | awk '{print "-f "$0}') $@
+         $DOCKER_COMPOSE_BIN $(find -name 'docker-compose*.yml' -type f -printf '%p\t%d\n'  2>/dev/null | sort -n -k2 | cut -f 1 | awk '{print "-f "$0}') $@
     }
     alias dockup='docker-compose up -d'
     alias dockdown='docker-compose down'

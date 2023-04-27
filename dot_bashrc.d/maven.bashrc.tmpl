@@ -9,6 +9,10 @@ if hash mvn 2>/dev/null; then
     alias mvnd='m -Dmaven.test.skip -Dmaven.javadoc.skip=true deploy -P profile-nexus'
     alias mvni='m -Dmaven.test.skip -Dmaven.javadoc.skip=true clean install'
 
+    mbump() {
+      mvn versions:set -DnewVersion=$1 -DgenerateBackupPoms=false
+    }
+
     # copy maven artifact
     alias d='python3 ~/.local/bin/deploy.py'
 fi

@@ -5,7 +5,20 @@
 
 set -gx EDITOR vim
 
-# FZF
+# nix
+if test -e $HOME/.nix-profile/etc/profile.d/nix.sh
+    fenv source $HOME/.nix-profile/etc/profile.d/nix.sh
+    abbr -a nix-update "nix-channel --update && nix-env -u"
+    function nix-search
+        nix-env -qa --description ".*$argv.*"
+    end
+end
+
+if test -d "$HOME/.local/bin"
+    fish_add_path "$HOME/.local/bin"
+end
+
+# fzf
 if type -q fzf
     function p --description "cd project"
         cd {{ .projectdir }} &&  _fzf_search_directory         
@@ -14,9 +27,30 @@ if type -q fzf
     fzf_configure_bindings --directory=\cf --git_log=\cg
 end
 
-# NIX
-if test -e ~/.nix-profile/etc/profile.d/nix.sh
-    fenv source ~/.nix-profile/etc/profile.d/nix.sh
+
+# maven
+if type -q mvn
+    abbr -a m mvn
+    abbr -a mvnp mvn -Dmaven.test.skip -Dmaven.javadoc.skip=true -DskipMunitTests clean package
+    abbr -a mvni mvn -Dmaven.test.skip -Dmaven.javadoc.skip=true clean install
+    abbr -a mvnd mvn -Dmaven.test.skip -Dmaven.javadoc.skip=true deploy -P profile-nexus
+    abbr -a mbump mvn versions:set -DnewVersion=$1 -DgenerateBackupPoms=false
+    abbr -a d python3 ~/.local/bin/deploy.py
+end
+
+# node
+if test -e "{{ .extra_ca_cert }}"
+    set -x NODE_EXTRA_CA_CERTS {{ .extra_ca_cert }}
+    set -x NODE_BUILD_CURL_OPTS --insecure
+end
+if test -d "$HOME/.nodenv"
+    #set -Ux fish_user_paths $HOME/.nodenv/bin $fish_user_paths
+    fish_add_path "$HOME/.nodenv/bin"
+end
+
+# python
+if test -e "{{ .extra_ca_cert }}"
+    set -x REQUESTS_CA_BUNDLE {{ .extra_ca_cert }}
 end
 
 if status is-interactive

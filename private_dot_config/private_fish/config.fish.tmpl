@@ -3,7 +3,10 @@
 # ===========================================================================
 # requires fisher (https://github.com/jorgebucaran/fisher)
 
+set -gx COLORTERM truecolor
 set -gx EDITOR vim
+set -gx LANG fr_FR.UTF-8
+set -gx LC_ALL fr_FR.UTF-8
 
 # nix
 if test -e $HOME/.nix-profile/etc/profile.d/nix.sh

@@ -1,0 +1,16 @@
+# ===========================================================================
+#  Fish config
+# ===========================================================================
+# requires fisher (https://github.com/jorgebucaran/fisher)
+
+if type -q fzf
+    function p --description "cd project"
+        cd {{ .projectdir }} &&  _fzf_search_directory         
+    end
+    # File find: CTRL+F, Git log: CTRL+G
+    fzf_configure_bindings --directory=\cf --git_log=\cg
+end
+
+if status is-interactive
+    # Commands to run in interactive sessions can go here
+end

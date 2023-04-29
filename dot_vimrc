@@ -19,6 +19,7 @@ Plugin 'kien/ctrlp.vim'
 Plugin 'tpope/vim-vinegar'
 Plugin 'flazz/vim-colorschemes'
 Plugin 'airblade/vim-gitgutter'
+Plugin 'khaveesh/vim-fish-syntax'
 
 call vundle#end()
 filetype plugin indent on     " required!

@@ -1,0 +1,35 @@
+session_name: gost
+start_directory: ~/
+windows:
+- window_name: mce
+  panes:
+    - shell_command:
+        - cd /mnt/c/yax/gitlab/snef/sgt/sgt-mce
+- window_name: bridge
+  panes:
+    - shell_command: 
+        - cd /mnt/c/yax/gitlab/snef/sgt/sgt-bridge
+- window_name: rct
+  panes:
+    - shell_command: 
+        - cd /mnt/c/yax/gitlab/snef/sgt/sgt-rct
+- window_name: internal
+  panes:
+    - shell_command: 
+        - cd /mnt/c/yax/gitlab/snef/sgt/sgt-internal-api
+- window_name: esb-api
+  panes:
+    - shell_command: 
+        - cd /mnt/c/yax/gitlab/snef/sgt/sgt-esb-api
+- window_name: fondations
+  panes:
+    - shell_command: 
+        - cd /mnt/c/yax/gitlab/snef/sgt/sgt-fondations
+- window_name: sgt-parent
+  panes:
+    - shell_command: 
+        - cd /mnt/c/yax/gitlab/snef/sgt/sgt-parent
+- window_name: pla-maint
+  panes:
+    - shell_command: 
+        - cd /mnt/c/yax/gitlab/snef/gt/si-gt-pla-maint

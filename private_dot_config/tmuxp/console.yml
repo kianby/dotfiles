@@ -1,0 +1,4 @@
+session_name: console
+start_directory: ~/
+windows:
+- window_name: build

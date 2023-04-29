@@ -1,0 +1,36 @@
+session_name: recette
+start_directory: ~/
+windows:
+- window_name: jboss
+  panes:
+    - shell_command: 
+        - ssh sirecette.snef.fr
+- window_name: gost
+  panes:
+    - shell_command: 
+        - ssh gost-recette.snef.fr
+- window_name: expo1
+  panes:
+    - shell_command: 
+        - ssh expo1-recette.snef.fr
+- window_name: analyticsrecette
+  panes:
+    - shell_command: 
+        - ssh analyticsrecette.snef.fr
+- window_name: spa
+  panes:
+    - shell_command: 
+        - ssh apache-spa-recette.snef.fr
+- window_name: esbinterne
+  panes:
+    - shell_command: 
+        - ssh muleinterne-recette.snef.fr
+- window_name: esbexterne
+  panes:
+    - shell_command: 
+        - ssh siclustera.snef.fr
+- window_name: portail
+  panes:
+    - shell_command: 
+        - ssh portailrecette.snef.fr
+

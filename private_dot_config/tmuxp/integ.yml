@@ -1,0 +1,35 @@
+session_name: integ
+start_directory: ~/
+windows:
+- window_name: jboss
+  panes:
+    - shell_command: 
+        - ssh sasi-integration.snef.fr
+- window_name: gost
+  panes:
+    - shell_command: 
+        - ssh sagost-integration.snef.fr
+- window_name: expo1
+  panes:
+    - shell_command: 
+        - ssh expo1-integration.snef.fr
+- window_name: expo2
+  panes:
+    - shell_command: 
+        - ssh expo2-integration.snef.fr
+- window_name: spa
+  panes:
+    - shell_command: 
+        - ssh apache-spa-integ.snef.fr
+- window_name: esbinterne 3.9
+  panes:
+    - shell_command: 
+        - ssh muleinterne-integ.snef.fr
+- window_name: esbinterne 3.1
+  panes:
+    - shell_command: 
+        - ssh muleesb-integration.snef.fr
+- window_name: esbexterne
+  panes:
+    - shell_command: 
+        - ssh esbmobilite-integ.snef.fr

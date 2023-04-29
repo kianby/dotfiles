@@ -17,6 +17,13 @@ end
 if test -d "$HOME/.local/bin"
     fish_add_path "$HOME/.local/bin"
 end
+abbr -a cdd "cd {{ .deploydir }}"
+set -x cdd {{ .deploydir }}
+
+# git
+if type -q tig
+  abbr -a tiga tig --all
+end
 
 # fzf
 if type -q fzf

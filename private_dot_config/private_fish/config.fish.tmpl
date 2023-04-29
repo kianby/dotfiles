@@ -3,12 +3,20 @@
 # ===========================================================================
 # requires fisher (https://github.com/jorgebucaran/fisher)
 
+set -gx EDITOR vim
+
+# FZF
 if type -q fzf
     function p --description "cd project"
         cd {{ .projectdir }} &&  _fzf_search_directory         
     end
     # File find: CTRL+F, Git log: CTRL+G
     fzf_configure_bindings --directory=\cf --git_log=\cg
+end
+
+# NIX
+if test -e ~/.nix-profile/etc/profile.d/nix.sh
+    fenv source ~/.nix-profile/etc/profile.d/nix.sh
 end
 
 if status is-interactive

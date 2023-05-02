@@ -47,6 +47,7 @@ if test -e "{{ .extra_ca_cert }}"
     set -x NODE_EXTRA_CA_CERTS {{ .extra_ca_cert }}
     set -x NODE_BUILD_CURL_OPTS --insecure
 end
+set -Ux fish_user_paths $HOME/.nodenv/bin $fish_user_paths
 
 # python
 if test -e "{{ .extra_ca_cert }}"

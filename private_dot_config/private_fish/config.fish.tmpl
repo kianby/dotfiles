@@ -19,6 +19,7 @@ if test -e $HOME/.nix-profile/etc/profile.d/nix.sh
 end
 
 fish_add_path "$HOME/.local/bin"
+fish_add_path "{{ .extra_user_path }}"
 abbr -a vi vim
 abbr -a cdd "cd {{ .deploydir }}"
 set -x cdd {{ .deploydir }}
@@ -39,7 +40,9 @@ abbr -a m mvn
 abbr -a mvnp mvn -Dmaven.test.skip -Dmaven.javadoc.skip=true -DskipMunitTests clean package
 abbr -a mvni mvn -Dmaven.test.skip -Dmaven.javadoc.skip=true clean install
 abbr -a mvnd mvn -Dmaven.test.skip -Dmaven.javadoc.skip=true deploy -P profile-nexus
-abbr -a mbump mvn versions:set -DnewVersion=$1 -DgenerateBackupPoms=false
+function mbump
+    mvn versions:set -DgenerateBackupPoms=false -DnewVersion=$argv
+end
 abbr -a d python3 ~/.local/bin/deploy.py
 
 # node
@@ -53,6 +56,12 @@ set -Ux fish_user_paths $HOME/.nodenv/bin $fish_user_paths
 if test -e "{{ .extra_ca_cert }}"
     set -x REQUESTS_CA_BUNDLE {{ .extra_ca_cert }}
 end
+
+# tmux
+set -x FAVORITE_COMMAND1 "{{ .tmux_favorite1 }}"
+set -x FAVORITE_COMMAND2 "{{ .tmux_favorite2 }}"
+set -x FAVORITE_COMMAND3 "{{ .tmux_favorite3 }}"
+set -x FAVORITE_COMMAND4 "{{ .tmux_favorite4 }}"
 
 if status is-interactive
     # Commands to run in interactive sessions can go here

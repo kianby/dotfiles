@@ -4,7 +4,7 @@
 # requires fisher (https://github.com/jorgebucaran/fisher)
 
 set -gx COLORTERM truecolor
-set -gx EDITOR vim
+set -gx EDITOR nvim
 set -gx LANG fr_FR.UTF-8
 set -gx LC_ALL fr_FR.UTF-8
 set --universal fish_greeting
@@ -20,7 +20,7 @@ end
 
 fish_add_path "$HOME/.local/bin"
 fish_add_path "{{ .extra_user_path }}"
-abbr -a vi vim
+abbr -a vi nvim
 abbr -a cdd "cd {{ .deploydir }}"
 set -x cdd {{ .deploydir }}
 
@@ -40,7 +40,8 @@ end
 fzf_configure_bindings --directory=\cf --git_log=\cg
 
 
-# maven
+# java
+set -x JAVA_HOME20 $HOME/.sdkman/candidates/java/{{ .java20_version }}
 abbr -a m mvn
 abbr -a mvnp mvn -Dmaven.test.skip -Dmaven.javadoc.skip=true -DskipMunitTests clean package
 abbr -a mvni mvn -Dmaven.test.skip -Dmaven.javadoc.skip=true clean install

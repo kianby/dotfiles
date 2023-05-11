@@ -21,6 +21,7 @@ end
 fish_add_path "$HOME/.local/bin"
 fish_add_path "{{ .extra_user_path }}"
 abbr -a vi nvim
+abbr -a s subl .
 abbr -a cdd "cd {{ .deploydir }}"
 set -x cdd {{ .deploydir }}
 

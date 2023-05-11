@@ -40,9 +40,7 @@ end
 # File find: CTRL+F, Git log: CTRL+G
 fzf_configure_bindings --directory=\cf --git_log=\cg
 
-
 # java
-set -x JAVA_HOME20 $HOME/.sdkman/candidates/java/{{ .java20_version }}
 abbr -a m mvn
 abbr -a mvnp mvn -Dmaven.test.skip -Dmaven.javadoc.skip=true -DskipMunitTests clean package
 abbr -a mvni mvn -Dmaven.test.skip -Dmaven.javadoc.skip=true clean install

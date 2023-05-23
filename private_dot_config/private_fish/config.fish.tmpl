@@ -8,9 +8,9 @@ set -gx EDITOR nvim
 set -gx LANG fr_FR.UTF-8
 set -gx LC_ALL fr_FR.UTF-8
 set --universal fish_greeting
-alias rm "rm --interactive --verbose"
-alias mv "mv --interactive --verbose"
-alias cp "cp --interactive --verbose"
+alias rmi "rm --interactive --verbose"
+alias mvi "mv --interactive --verbose"
+alias cpi "cp --interactive --verbose"
 
 # nix
 if test -e $HOME/.nix-profile/etc/profile.d/nix.sh

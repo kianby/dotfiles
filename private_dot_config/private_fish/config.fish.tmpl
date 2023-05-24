@@ -63,6 +63,15 @@ function mbump
 end
 abbr -a d python3 ~/.local/bin/deploy.py
 
+# sdkman 
+if test -f "$__fish_sdkman_init"
+    function sdk_autoenv --on-variable PWD
+        if test -f ".sdkmanrc"
+            sdk env
+        end
+    end
+end
+
 # node
 if test -e "{{ .extra_ca_cert }}"
     set -x NODE_EXTRA_CA_CERTS {{ .extra_ca_cert }}

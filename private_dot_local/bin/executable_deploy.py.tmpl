@@ -2,10 +2,8 @@
 # -*- coding: UTF-8 -*-
 
 import os
+import argparse
 from shutil import copy2
-
-DEPLOY_DIRECTORY = "{{ .deploydir }}"
-
 
 def get_file_weight(filename):
     if filename.endswith(".ear"):
@@ -43,15 +41,18 @@ def find_recursive_targets(path):
     return targets
 
 
-def process(path):
+def process(path, deploydir):
     candidates = sorted(find_recursive_targets(path), key=lambda target: target[1], reverse=True)
     if candidates:
         filename, _ = candidates[0]
-        print("copie " + filename)  # + ' vers ' + DEPLOY_DIRECTORY)
-        copy2(filename, DEPLOY_DIRECTORY)
+        print("copie " + filename + ' vers ' + deploydir)
+        copy2(filename, deploydir)
     else:
         print("impossible de déterminer l'archive à copier")
 
 
 if __name__ == "__main__":
-    process(".")
+    parser = argparse.ArgumentParser()
+    parser.add_argument("dir", help="deployment directory")
+    args = parser.parse_args()
+    process(".", args.dir)

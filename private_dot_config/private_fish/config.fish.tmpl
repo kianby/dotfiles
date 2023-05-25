@@ -61,7 +61,9 @@ function mbump
         mvn versions:set -DgenerateBackupPoms=false -DnewVersion=$argv[1]-$kind
     end
 end
-abbr -a d python3 ~/.local/bin/deploy.py
+alias d "python3 ~/.local/bin/deploy.py {{ .deploydir }}"
+alias deploy_dev "python3 ~/.local/bin/deploy.py {{ .deploydir_dev }}"
+alias deploy_test "python3 ~/.local/bin/deploy.py {{ .deploydir_test }}"
 
 # sdkman 
 if test -f "$__fish_sdkman_init"

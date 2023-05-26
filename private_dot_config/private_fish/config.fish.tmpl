@@ -8,9 +8,9 @@ set -gx EDITOR nvim
 set -gx LANG fr_FR.UTF-8
 set -gx LC_ALL fr_FR.UTF-8
 set --universal fish_greeting
-alias rmi "rm --interactive --verbose"
-alias mvi "mv --interactive --verbose"
-alias cpi "cp --interactive --verbose"
+abbr -a rm "rm --interactive --verbose"
+abbr -a mv "mv --interactive --verbose"
+abbr -a cp "cp --interactive --verbose"
 
 # nix
 if test -e $HOME/.nix-profile/etc/profile.d/nix.sh
@@ -22,7 +22,6 @@ if test -e $HOME/.nix-profile/etc/profile.d/nix.sh
 end
 
 fish_add_path "$HOME/.local/bin"
-fish_add_path "{{ .extra_user_path }}"
 abbr -a vi nvim
 abbr -a v nvim
 abbr -a s subl .
@@ -62,8 +61,6 @@ function mbump
     end
 end
 alias d "python3 ~/.local/bin/deploy.py {{ .deploydir }}"
-alias deploy_dev "python3 ~/.local/bin/deploy.py {{ .deploydir_dev }}"
-alias deploy_test "python3 ~/.local/bin/deploy.py {{ .deploydir_test }}"
 
 # sdkman 
 if test -f "$__fish_sdkman_init"
@@ -91,6 +88,11 @@ set -x FAVORITE_COMMAND1 "{{ .tmux_favorite1 }}"
 set -x FAVORITE_COMMAND2 "{{ .tmux_favorite2 }}"
 set -x FAVORITE_COMMAND3 "{{ .tmux_favorite3 }}"
 set -x FAVORITE_COMMAND4 "{{ .tmux_favorite4 }}"
+
+# extend with specific config
+if test -e "$HOME/.config/fish/custom.fish"
+    source "$HOME/.config/fish/custom.fish"
+end
 
 if status is-interactive
     # Commands to run in interactive sessions can go here

@@ -26,10 +26,6 @@ a sample file (located in *~/config/chezmoi/chezmoi.toml*)
   projectdir = "~/work"
   # deployment path for "d" command (java deploy)
   deploydir = "~/dist"
-  # deployment path to dev env with "deploy_dev" command
-  deploydir_dev = "~/dist_dev"
-  # deployment path to test env with "deploy_test" command
-  deploydir_test = "~/dist_test"
   # Java versions from sdkman
   java6_version = "6.0.119-zulu"
   java7_version = "7.0.342-zulu"
@@ -43,8 +39,6 @@ a sample file (located in *~/config/chezmoi/chezmoi.toml*)
   java_truststore_password = "secret"
   # docker compose bin
   docker_compose_command = "/usr/bin/docker compose"
-  # user path added to path
-  extra_user_path = ""
   # tmux favorite shortcuts CTRL-ALT-1, CTRL-ALT-2, CTRL-ALT-3, CTRL-ALT-4
   tmux_favorite1 = "cd my_favorite_path"
   tmux_favorite2 = "sudo su"

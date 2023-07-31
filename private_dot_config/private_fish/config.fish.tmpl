@@ -8,9 +8,6 @@ set -gx EDITOR nvim
 set -gx LANG fr_FR.UTF-8
 set -gx LC_ALL fr_FR.UTF-8
 set --universal fish_greeting
-abbr -a rm "rm --interactive --verbose"
-abbr -a mv "mv --interactive --verbose"
-abbr -a cp "cp --interactive --verbose"
 
 # nix
 if test -e $HOME/.nix-profile/etc/profile.d/nix.sh
@@ -94,6 +91,14 @@ if test -e "$HOME/.config/fish/custom.fish"
     source "$HOME/.config/fish/custom.fish"
 end
 
+# Commands to run in interactive sessions can go here
 if status is-interactive
-    # Commands to run in interactive sessions can go here
+    abbr -a rm "rm --interactive --verbose"
+    abbr -a mv "mv --interactive --verbose"
+    abbr -a cp "cp --interactive --verbose"
+
+    # direnv (https://direnv.net)
+    if which direnv > /dev/null
+        direnv hook fish | source
+    end
 end

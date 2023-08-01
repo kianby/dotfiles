@@ -98,7 +98,7 @@ if status is-interactive
     abbr -a cp "cp --interactive --verbose"
 
     # direnv (https://direnv.net)
-    if which direnv > /dev/null
+    if type -q direnv
         direnv hook fish | source
     end
 end

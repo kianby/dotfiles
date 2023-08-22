@@ -1,10 +1,13 @@
 [user]
 	email = {{ .git_email }}
 	name = {{ .git_alias }}
+
 [pull]
 	rebase = false
+
 [push]
-        default = current
+  default = current
+
 [alias]
   a = add
   ahead-of-master = log --oneline origin/master..HEAD
@@ -37,18 +40,35 @@
   untrack = "!for BRANCH in $(git branch | grep -v '*'); do git branch -D \"${BRANCH}\"; done"
   work-in-progress = rebase -i @{u}
   sync = "!git untrack && git gc && git f && git track"
+
 [include]
   path = ~/.gitconfig_custom.inc
+
 [credential]
   helper = store
+
 [credential "https://github.com"]
   helper = cache
-[mergetool "meld"]
-  cmd = meld "$LOCAL" "$MERGED" "$REMOTE" --output "$MERGED"
-[merge]
-  tool = meld
 
 [core]
-        pager = diff-so-fancy | less --tabs=4 -RFX
+    pager = diff-so-fancy | less --tabs=4 -RFX
+
 [interactive]
-        diffFilter = diff-so-fancy --patch
+    diffFilter = diff-so-fancy --patch
+
+[color]
+    ui = true    
+[color "diff-highlight"]
+	oldNormal = red bold
+	oldHighlight = red bold 52
+	newNormal = green bold
+	newHighlight = green bold 22
+[color "diff"]
+	meta = 11
+	frag = magenta bold
+	func = 146 bold
+	commit = yellow bold
+	old = red bold
+	new = green bold
+	whitespace = red reverse
+

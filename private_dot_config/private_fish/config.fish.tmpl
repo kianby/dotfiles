@@ -88,6 +88,9 @@ set -x FAVORITE_COMMAND2 "{{ .tmux_favorite2 }}"
 set -x FAVORITE_COMMAND3 "{{ .tmux_favorite3 }}"
 set -x FAVORITE_COMMAND4 "{{ .tmux_favorite4 }}"
 
+# sponge
+set sponge_successful_exit_codes 0 130
+
 # extend with specific config
 if test -e "$HOME/.config/fish/custom.fish"
     source "$HOME/.config/fish/custom.fish"

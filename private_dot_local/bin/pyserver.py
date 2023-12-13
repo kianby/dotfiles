@@ -29,6 +29,8 @@ class S(BaseHTTPRequestHandler):
 
 def run(server_class=HTTPServer, handler_class=S, port=8080):
     logging.basicConfig(level=logging.INFO)
+    fh = logging.FileHandler('/tmp/pyserver.log')
+    logging.getLogger().addHandler(fh)
     server_address = ('', port)
     httpd = server_class(server_address, handler_class)
     logging.info('Starting httpd...\n')

@@ -1,3 +1,5 @@
+set line-graphics = utf-8
+
 # Push local changes to origin
 bind status P !git p
 

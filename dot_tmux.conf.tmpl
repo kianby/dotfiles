@@ -55,7 +55,7 @@ setw -g visual-activity on
 
 # Auto rename
 set-option -g automatic-rename on 
-set-option -g automatic-rename-format '#{b:pane_current_path}'
+set-option -g automatic-rename-format '#{b;s/{{ .username }}/~/:pane_current_path}'
 
 # Allows us to use C-a a <command> to send commands to a TMUX session inside 
 # another TMUX session

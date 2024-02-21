@@ -121,4 +121,9 @@ if status is-interactive
     if type -q direnv
         direnv hook fish | source
     end
+
+    # run tmux session
+    if not set -q TMUX
+      tmux attach -t build; or tmux new -s build
+    end
 end

@@ -11,6 +11,7 @@
   f = fetch -p
   nb = checkout -b
   p = push -u origin
+  pf = p --force-with-lease
   s = status
   track = "!for BRANCH in $(git branch -a | grep remotes | grep -v HEAD); do git branch --track \"${BRANCH#remotes/origin/}\" \"${BRANCH}\"; done"
   untrack = "!for BRANCH in $(git branch | grep -v '*'); do git branch -D \"${BRANCH}\"; done"

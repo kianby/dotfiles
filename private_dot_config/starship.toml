@@ -1,3 +1,6 @@
+# Get editor completions based on the config schema
+"$schema" = 'https://starship.rs/config-schema.json'
+
 # Inserts a blank line between shell prompts
 add_newline = true
 command_timeout = 1000
@@ -16,7 +19,7 @@ behind = "⇣${count}"
 disabled = true
 
 [java]
-disabled = true
+disabled = false
 
 [jobs]
 disabled = true

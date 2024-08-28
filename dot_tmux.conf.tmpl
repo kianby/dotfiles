@@ -13,7 +13,7 @@ set -g display-time 4000
 
 # screen-256 true color
 set -g default-terminal "screen-256color"
-set-option -sa terminal-overrides ",alacritty:Tc"
+set -ga terminal-overrides ",xterm-256color:Tc"
 
 # focus events enabled for terminals that support them
 set -g focus-events on

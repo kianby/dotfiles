@@ -108,10 +108,6 @@ fi
 alias dmesg='dmesg -T'
 alias grep='grep --color'
 
-if hash python3 2>/dev/null; then
-  alias serve="python3 -m $(python3 -c 'import sys; print("http.server" if sys.version_info[:2] > (2,7) else "SimpleHTTPServer")')"
-fi
-
 if hash tmux 2>/dev/null; then
   alias ta='tmux attach'
   alias tkill="for s in \$(tmux list-sessions | awk -F ':' '{print \$1}' | fzf); do tmux kill-session -t \$s; done;"
@@ -159,6 +155,10 @@ if [ -d "$HOME/.bashrc.d/" ]; then
             . "$file"
     done
 fi
+
+if [ -f "$HOME/.bashrc.local" ]; then
+  source $HOME/.bashrc.local
+fi 
 
 # ---------------------------------------------------------------------------
 # History 

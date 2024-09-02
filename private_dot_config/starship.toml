@@ -4,42 +4,56 @@
 command_timeout = 1000
 
 [directory]
+style = "fg:#2e3440 bg:#81a1c1"
+read_only = " "
+format = "[ 󰉋 $path ]($style)[$read_only]($read_only_style)"
+read_only_style = "fg:#2e3440 bold bg:#81a1c1"
 truncation_length = 5
 truncation_symbol = "…/"
 truncate_to_repo = false
-style = "blue"
-read_only = " 󰌾"
 
 [jobs]
 disabled = true
 
-# Pure Preset
-
 format = """
-$username\
-$hostname\
+
+[](#5e81ac)\
+$os$username[@](bg:#5e81ac fg:#2e3440)$hostname\
+[](bg:#81a1c1 fg:#5e81ac)\
 $directory\
-$git_branch\
-$git_state\
-$git_status\
+[](bg:#88c0d0 fg:#81a1c1)\
+$git_branch$git_commit$git_state$git_metrics$git_status\
+
+[](bg:#8fbcbb fg:#88c0d0)\
+$package$c$cmake$cobol$daml$dart$deno$dotnet$elixir$elm$erlang$fennel$gleam\
+$golang$guix_shell$haskell$haxe$helm$java$julia$kotlin$gradle$lua$nim$nodejs\
+$ocaml$opa$perl$php$pulumi$purescript$python$quarto$raku$rlang$red$ruby$rust\
+$scala$solidity$swift$terraform$typst$vlang$vagrant$zig\
+[](bg:#d9dee9 fg:#8fbcbb)\
 $cmd_duration\
+[](fg:#d9dee9)\
 $line_break\
-$python\
-$character"""
+$character
+"""
 
 [character]
-success_symbol = "[❯](purple)"
-error_symbol = "[❯](red)"
-vimcmd_symbol = "[❮](green)"
+success_symbol = "[❯](bold green)"
+error_symbol = "[❯](bold red)"
+vimcmd_symbol = "[❮](bold green)"
+
+[sudo]
+disabled = true
+symbol = " "
+style = "fg:#2e3440 bg:#d9dee9"
+format = "[ $symbol]($style)"
 
 [git_branch]
 format = "[$branch]($style)"
-style = "bright-black"
+style = "fg:#2e3440 bg:#88c0d0"
 symbol = " "
 
 [git_status]
 format = "[[(*$conflicted$untracked$modified$staged$renamed$deleted)](218) ($ahead_behind$stashed )]($style)"
-style = "cyan"
 conflicted = "​"
 untracked = "​"
 modified = "​"
@@ -53,15 +67,14 @@ behind = "⇣${count}"
 
 [git_state]
 format = '\([$state( $progress_current/$progress_total)]($style)\) '
-style = "bright-black"
 
 [cmd_duration]
-format = "[$duration]($style) "
-style = "yellow"
+format = "[ 󰔚 $duration ]($style)"
+style = "fg:#2e3440 bg:#d9dee9"
 
 [python]
 format = "[$virtualenv]($style) "
-style = "bright-black"
+style = "fg:#2e3440 bg:#8fbcbb"
 symbol = " "
 
 # Nerd Font
@@ -119,6 +132,7 @@ ssh_symbol = " "
 
 [java]
 symbol = " "
+style = "fg:#2e3440 bg:#8fbcbb"
 
 [julia]
 symbol = " "
@@ -146,6 +160,10 @@ symbol = " "
 
 [ocaml]
 symbol = " "
+
+[os]
+style = "fg:#2e3440 bg:#5e81ac"
+disabled = true
 
 [os.symbols]
 Alpaquita = " "

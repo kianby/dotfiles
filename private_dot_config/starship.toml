@@ -1,30 +1,15 @@
 # Get editor completions based on the config schema
 "$schema" = 'https://starship.rs/config-schema.json'
 
-# colorscheme
-#
-# #2E3440
-# #3B4252
-# #434C5E
-# #4C566A
-# #D8DEE9
-# #E5E9F0
-# #ECEFF4
-# #8FBCBB
-# #88C0D0
-# #81A1C1
-# #5E81AC
-# #BF616A
-# #D08770
-# #EBCB8B
-# #A3BE8C
-# #B48EAD
-
 format = """
-$username\
+[ ](bg:inverted fg:#bf616a)\
+$username$hostname\
+[](bg:#d08770 fg:#bf616a)\
 $directory\
+[](fg:#d08770 bg:#ebcb8b)\
 $git_branch\
 $git_status\
+[](fg:#ebcb8b bg:#86BBD8)\
 $c\
 $elixir\
 $elm\
@@ -32,53 +17,105 @@ $golang\
 $haskell\
 $java\
 $julia\
-$nodejs\
 $nim\
 $rust\
-[\uE0B0 ](fg:#81A1C1 bg:#2E3440)\
-$line_break\
-$character
+[](fg:#86BBD8 bg:#81a1c1)\
+$kubernetes\
+$docker_context\
+[](fg:#81a1c1 bg:#5e81ac)\
+$character\
+$time\
+[ ](fg:#5e81ac)\
 """
 
-command_timeout = 1000
+# Disable the blank line at the start of the prompt
+add_newline = false
 
-[directory]
-style = "bg:#BF616A"
-format = "[ $path ]($style)[\uE0BE](bg:#BF616A fg:#D08770)"
-truncation_length = 3
-truncation_symbol = "…/"
-truncate_to_repo = false
+# You can also replace your username with a neat symbol like  to save some space
+[username]
+show_always = false
+style_user = "bg:#bf616a bold"
+style_root = "bg:#bf616a bold"
+format = '[$user]($style)'
 
-[jobs]
+[hostname]
+style = "bg:#bf616a bold"
+format = '[@$hostname ]($style)'
+ssh_only = false
 disabled = true
 
-[character]
-success_symbol = "[   \uE007  ](bg:#4C566A)[\uE0BC](fg:#4C566A)"
-error_symbol = "[   \uE007  ](bg:#4C566A fg:#BF616A)[\uE0BC](fg:#4C566A)"
+[directory]
+style = "bg:#d08770 bold"
+format = "[ $path ]($style)"
+truncation_length = 0
+truncation_symbol = ""
+
+[docker_context]
+symbol = " "
+style = "bg:#81a1c1 fg:#2e3440 bold"
+format = '[ $symbol $context ]($style) $path'
+
+[kubernetes]
+symbol = "☸ "
+style = "bg:#81a1c1 fg:#2e3440 bold"
+format = '[ $symbol $context ]($style)'
+disabled = true
 
 [git_branch]
-symbol = "\uE0A0"
-style = "bg:#D08770"
-format = "[[ $symbol $branch ](bg:#D08770)]($style)"
-
-[git_metrics]
-disabled = false
+symbol = ""
+style = "bg:#ebcb8b bold fg:#bf616a"
+format = '[ $symbol $branch ]($style)'
 
 [git_status]
-format = "[($all_status$ahead_behind)]($style)[\uE0BC](bg:#81A1C1 fg:#D08770)"
-style = "bg:#D08770"
-conflicted = "👿 $count "
-ahead = "⇡ $count "
-behind = "⇣ $count "
-diverged = " $count "
-untracked = "🤷 $count "
-stashed = "‍📦 $count "
-modified = "פֿ $count "
-staged = "[ $count ]"
-renamed = " $count "
-deleted = "🗑 $count "
+style = "bg:#ebcb8b bold fg:#bf616a"
+format = '[$all_status$ahead_behind ]($style)'
+ahead = ' ${count}'
+diverged = ' ${ahead_count}${behind_count}'
+behind = ' ${count}'
 
-[cmd_duration]
-format = "[ 󰔚 $duration ]($style)"
-style = "fg:#2e3440 bg:#d9dee9"
+[golang]
+symbol = " "
+style = "bg:#88c0d0 fg:#2e3440 bold"
+format = '[ $symbol ($version) ]($style)'
 
+[haskell]
+symbol = " "
+style = "bg:#88c0d0"
+format = '[ $symbol ($version) ]($style)'
+
+[java]
+symbol = " "
+style = "bg:#88c0d0 fg:#2e3440 bold"
+format = '[ $symbol ($version) ]($style)'
+
+[julia]
+symbol = " "
+style = "bg:#88c0d0 fg:#2e3440 bold"
+format = '[ $symbol ($version) ]($style)'
+
+[nodejs]
+symbol = ""
+style = "bg:#88c0d0 fg:#2e3440 bold"
+format = '[ $symbol ($version) ]($style)'
+
+[nim]
+symbol = " "
+style = "bg:#88c0d0 fg:#2e3440 bold"
+format = '[ $symbol ($version) ]($style)'
+
+[rust]
+symbol = ""
+style = "bg:#88c0d0 fg:#2e3440 bold"
+format = '[ $symbol ($version) ]($style)'
+
+[time]
+disabled = true
+time_format = "%R" # Hour:Minute Format
+style = "bg:#5e81ac bold"
+format = '[$time ]($style)'
+
+[character]
+disabled = false
+success_symbol = "[ ♥ ](bg:#5e81ac)"
+error_symbol = "[ ✖ ](bg:#5e81ac)"
+format = "$symbol"

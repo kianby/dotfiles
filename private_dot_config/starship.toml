@@ -1,239 +1,84 @@
 # Get editor completions based on the config schema
 "$schema" = 'https://starship.rs/config-schema.json'
 
+# colorscheme
+#
+# #2E3440
+# #3B4252
+# #434C5E
+# #4C566A
+# #D8DEE9
+# #E5E9F0
+# #ECEFF4
+# #8FBCBB
+# #88C0D0
+# #81A1C1
+# #5E81AC
+# #BF616A
+# #D08770
+# #EBCB8B
+# #A3BE8C
+# #B48EAD
+
+format = """
+$username\
+$directory\
+$git_branch\
+$git_status\
+$c\
+$elixir\
+$elm\
+$golang\
+$haskell\
+$java\
+$julia\
+$nodejs\
+$nim\
+$rust\
+[\uE0B0 ](fg:#81A1C1 bg:#2E3440)\
+$line_break\
+$character
+"""
+
 command_timeout = 1000
 
 [directory]
-style = "fg:#2e3440 bg:#81a1c1"
-read_only = " "
-format = "[ 󰉋 $path ]($style)[$read_only]($read_only_style)"
-read_only_style = "fg:#2e3440 bold bg:#81a1c1"
-truncation_length = 5
+style = "bg:#BF616A"
+format = "[ $path ]($style)[\uE0BE](bg:#BF616A fg:#D08770)"
+truncation_length = 3
 truncation_symbol = "…/"
 truncate_to_repo = false
 
 [jobs]
 disabled = true
 
-format = """
-
-[](#5e81ac)\
-$os$username[@](bg:#5e81ac fg:#2e3440)$hostname\
-[](bg:#81a1c1 fg:#5e81ac)\
-$directory\
-[](bg:#88c0d0 fg:#81a1c1)\
-$git_branch$git_commit$git_state$git_metrics$git_status\
-
-[](bg:#8fbcbb fg:#88c0d0)\
-$package$c$cmake$golang$guix_shell$java$gradle$lua$nim$nodejs\
-$perl$php$python$ruby$rust$scala$typst$vlang$vagrant$zig\
-[](bg:#d9dee9 fg:#8fbcbb)\
-$cmd_duration\
-[](fg:#d9dee9)\
-$line_break\
-$character
-"""
-
 [character]
-success_symbol = "[❯](bold green)"
-error_symbol = "[❯](bold red)"
-vimcmd_symbol = "[❮](bold green)"
-
-[sudo]
-disabled = true
-symbol = " "
-style = "fg:#2e3440 bg:#d9dee9"
-format = "[ $symbol]($style)"
+success_symbol = "[   \uE007  ](bg:#4C566A)[\uE0BC](fg:#4C566A)"
+error_symbol = "[   \uE007  ](bg:#4C566A fg:#BF616A)[\uE0BC](fg:#4C566A)"
 
 [git_branch]
-format = "[$branch]($style)"
-style = "fg:#2e3440 bg:#88c0d0"
-symbol = " "
+symbol = "\uE0A0"
+style = "bg:#D08770"
+format = "[[ $symbol $branch ](bg:#D08770)]($style)"
+
+[git_metrics]
+disabled = false
 
 [git_status]
-format = "[[(*$conflicted$untracked$modified$staged$renamed$deleted)](218) ($ahead_behind$stashed )]($style)"
-conflicted = "​"
-untracked = "​"
-modified = "​"
-staged = "​"
-renamed = "​"
-deleted = "​"
-stashed = "≡"
-ahead = "⇡${count}"
-diverged = "⇕⇡${ahead_count}⇣${behind_count}"
-behind = "⇣${count}"
-
-[git_state]
-format = '\([$state( $progress_current/$progress_total)]($style)\) '
+format = "[($all_status$ahead_behind)]($style)[\uE0BC](bg:#81A1C1 fg:#D08770)"
+style = "bg:#D08770"
+conflicted = "👿 $count "
+ahead = "⇡ $count "
+behind = "⇣ $count "
+diverged = " $count "
+untracked = "🤷 $count "
+stashed = "‍📦 $count "
+modified = "פֿ $count "
+staged = "[ $count ]"
+renamed = " $count "
+deleted = "🗑 $count "
 
 [cmd_duration]
 format = "[ 󰔚 $duration ]($style)"
 style = "fg:#2e3440 bg:#d9dee9"
 
-[python]
-format = "[$virtualenv]($style) "
-style = "fg:#2e3440 bg:#8fbcbb"
-symbol = " "
-
-# Nerd Font
-
-[aws]
-symbol = "  "
-
-[buf]
-symbol = " "
-
-[c]
-symbol = " "
-
-[conda]
-symbol = " "
-
-[crystal]
-symbol = " "
-
-[dart]
-symbol = " "
-
-[docker_context]
-symbol = " "
-
-[elixir]
-symbol = " "
-
-[elm]
-symbol = " "
-
-[fennel]
-symbol = " "
-
-[fossil_branch]
-symbol = " "
-
-[golang]
-symbol = " "
-
-[guix_shell]
-symbol = " "
-
-[haskell]
-symbol = " "
-
-[haxe]
-symbol = " "
-
-[hg_branch]
-symbol = " "
-
-[hostname]
-ssh_symbol = " "
-
-[java]
-symbol = " "
-style = "fg:#2e3440 bg:#8fbcbb"
-
-[julia]
-symbol = " "
-
-[kotlin]
-symbol = " "
-
-[lua]
-symbol = " "
-
-[memory_usage]
-symbol = "󰍛 "
-
-[meson]
-symbol = "󰔷 "
-
-[nim]
-symbol = "󰆥 "
-
-[nix_shell]
-symbol = " "
-
-[nodejs]
-symbol = " "
-
-[ocaml]
-symbol = " "
-
-[os]
-style = "fg:#2e3440 bg:#5e81ac"
-disabled = true
-
-[os.symbols]
-Alpaquita = " "
-Alpine = " "
-AlmaLinux = " "
-Amazon = " "
-Android = " "
-Arch = " "
-Artix = " "
-CentOS = " "
-Debian = " "
-DragonFly = " "
-Emscripten = " "
-EndeavourOS = " "
-Fedora = " "
-FreeBSD = " "
-Garuda = "󰛓 "
-Gentoo = " "
-HardenedBSD = "󰞌 "
-Illumos = "󰈸 "
-Kali = " "
-Linux = " "
-Mabox = " "
-Macos = " "
-Manjaro = " "
-Mariner = " "
-MidnightBSD = " "
-Mint = " "
-NetBSD = " "
-NixOS = " "
-OpenBSD = "󰈺 "
-openSUSE = " "
-OracleLinux = "󰌷 "
-Pop = " "
-Raspbian = " "
-Redhat = " "
-RedHatEnterprise = " "
-RockyLinux = " "
-Redox = "󰀘 "
-Solus = "󰠳 "
-SUSE = " "
-Ubuntu = " "
-Unknown = " "
-Void = " "
-Windows = "󰍲 "
-
-[package]
-symbol = "󰏗 "
-
-[perl]
-symbol = " "
-
-[php]
-symbol = " "
-
-[pijul_channel]
-symbol = " "
-
-[rlang]
-symbol = "󰟔 "
-
-[ruby]
-symbol = " "
-
-[rust]
-symbol = "󱘗 "
-
-[scala]
-symbol = " "
-
-[swift]
-symbol = " "
-
-[zig]
-symbol = " "

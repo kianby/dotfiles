@@ -2,111 +2,44 @@
 "$schema" = 'https://starship.rs/config-schema.json'
 
 format = """
-[ ](bg:inverted fg:#bf616a)\
-$username$hostname\
-[](bg:#d08770 fg:#bf616a)\
+[](#5e81ac)\
+$os$username[@](bg:#5e81ac fg:#2e3440)$hostname\
+[](bg:#81a1c1 fg:#5e81ac)\
 $directory\
-[](fg:#d08770 bg:#ebcb8b)\
-$git_branch\
-$git_status\
-[](fg:#ebcb8b bg:#86BBD8)\
-$c\
-$elixir\
-$elm\
-$golang\
-$haskell\
-$java\
-$julia\
-$nim\
-$rust\
-[](fg:#86BBD8 bg:#81a1c1)\
-$kubernetes\
-$docker_context\
-[](fg:#81a1c1 bg:#5e81ac)\
-$character\
-$time\
-[ ](fg:#5e81ac)\
+[](bg:#88c0d0 fg:#81a1c1)\
+$git_branch$git_commit$git_state$git_metrics$git_status\
+\
+$package$c$cmake$cobol$daml$dart$deno$dotnet$elixir$elm$erlang$fennel$gleam\
+$golang$guix_shell$haskell$haxe$helm$java$julia$kotlin$gradle$lua$nim$nodejs\
+$ocaml$opa$perl$php$pulumi$purescript$python$quarto$raku$rlang$red$ruby$rust\
+$scala$solidity$swift$terraform$typst$vlang$vagrant$zig\
+[](bg:#d9dee9 fg:#8fbcbb)\
+$cmd_duration\
+[](fg:#d9dee9)\
+$line_break\
+$character
 """
 
 # Disable the blank line at the start of the prompt
 add_newline = false
 
-# You can also replace your username with a neat symbol like  to save some space
 [username]
 show_always = false
-style_user = "bg:#bf616a bold"
-style_root = "bg:#bf616a bold"
-format = '[$user]($style)'
 
 [hostname]
-style = "bg:#bf616a bold"
-format = '[@$hostname ]($style)'
-ssh_only = false
 disabled = true
 
 [directory]
-style = "bg:#d08770 bold"
-format = "[ $path ]($style)"
+style = "fg:#2e3440 bg:#81a1c1"
+read_only = " "
+format = "[ 󰉋 $path ]($style)[$read_only]($read_only_style)"
+read_only_style = "fg:#2e3440 bold bg:#81a1c1"
 truncation_length = 0
 truncation_symbol = ""
 
-[docker_context]
-symbol = " "
-style = "bg:#81a1c1 fg:#2e3440 bold"
-format = '[ $symbol $context ]($style) $path'
-
-[kubernetes]
-symbol = "☸ "
-style = "bg:#81a1c1 fg:#2e3440 bold"
-format = '[ $symbol $context ]($style)'
-disabled = true
-
-[git_branch]
-symbol = ""
-style = "bg:#ebcb8b bold fg:#bf616a"
-format = '[ $symbol $branch ]($style)'
-
-[git_status]
-style = "bg:#ebcb8b bold fg:#bf616a"
-format = '[$all_status$ahead_behind ]($style)'
-ahead = ' ${count}'
-diverged = ' ${ahead_count}${behind_count}'
-behind = ' ${count}'
-
-[golang]
-symbol = " "
-style = "bg:#88c0d0 fg:#2e3440 bold"
-format = '[ $symbol ($version) ]($style)'
-
-[haskell]
-symbol = " "
-style = "bg:#88c0d0"
-format = '[ $symbol ($version) ]($style)'
-
-[java]
-symbol = " "
-style = "bg:#88c0d0 fg:#2e3440 bold"
-format = '[ $symbol ($version) ]($style)'
-
-[julia]
-symbol = " "
-style = "bg:#88c0d0 fg:#2e3440 bold"
-format = '[ $symbol ($version) ]($style)'
-
-[nodejs]
-symbol = ""
-style = "bg:#88c0d0 fg:#2e3440 bold"
-format = '[ $symbol ($version) ]($style)'
-
-[nim]
-symbol = " "
-style = "bg:#88c0d0 fg:#2e3440 bold"
-format = '[ $symbol ($version) ]($style)'
-
-[rust]
-symbol = ""
-style = "bg:#88c0d0 fg:#2e3440 bold"
-format = '[ $symbol ($version) ]($style)'
+[cmd_duration]
+format = "[ 󰔚 $duration ]($style)"
+style = "fg:#2e3440 bg:#d9dee9"
 
 [time]
 disabled = true
@@ -116,6 +49,34 @@ format = '[$time ]($style)'
 
 [character]
 disabled = false
-success_symbol = "[ ♥ ](bg:#5e81ac)"
-error_symbol = "[ ✖ ](bg:#5e81ac)"
-format = "$symbol"
+success_symbol = "[ 󱞩](bold green)"
+error_symbol = "[ 󱞩](bold red)"
+vimcmd_symbol = "[  󱞩](bold green)"
+
+[git_branch]
+format = "[ $symbol$branch(:$remote_branch) ]($style)"
+symbol = "󰘬 "
+style = "fg:#2e3440 bg:#88c0d0"
+
+[git_status]
+ahead = '${count}'
+diverged = '${ahead_count}${behind_count}'
+behind = '${count}'
+
+[git_commit]
+
+[git_state]
+
+[git_metrics]
+
+[java]
+symbol = " "
+style = "fg:#2e3440 bg:#8fbcbb"
+format = '[ $symbol ($version) ]($style)'
+
+[nodejs]
+symbol = ""
+style = "fg:#2e3440 bg:#8fbcbb"
+format = '[ $symbol ($version) ]($style)'
+
+

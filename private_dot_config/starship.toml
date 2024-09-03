@@ -21,7 +21,7 @@ $character
 """
 
 # Disable the blank line at the start of the prompt
-add_newline = false
+add_newline = true
 
 [username]
 show_always = false

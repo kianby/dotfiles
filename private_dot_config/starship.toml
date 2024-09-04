@@ -2,81 +2,153 @@
 "$schema" = 'https://starship.rs/config-schema.json'
 
 format = """
-[](#5e81ac)\
-$os$username[@](bg:#5e81ac fg:#2e3440)$hostname\
-[](bg:#81a1c1 fg:#5e81ac)\
+(nord0)\
+$username\
+(bg:nord0 fg:nord4)\
+$hostname\
+$os\
+[](bg:nord1 fg:nord0)\
 $directory\
-[](bg:#88c0d0 fg:#81a1c1)\
-$git_branch$git_commit$git_state$git_metrics$git_status\
-\
-$package$c$cmake$cobol$daml$dart$deno$dotnet$elixir$elm$erlang$fennel$gleam\
-$golang$guix_shell$haskell$haxe$helm$java$julia$kotlin$gradle$lua$nim$nodejs\
-$ocaml$opa$perl$php$pulumi$purescript$python$quarto$raku$rlang$red$ruby$rust\
-$scala$solidity$swift$terraform$typst$vlang$vagrant$zig\
-[](bg:#d9dee9 fg:#8fbcbb)\
-$cmd_duration\
-[](fg:#d9dee9)\
-$line_break\
-$character
+[](bg:nord2 fg:nord1)\
+$git_branch\
+$git_status\
+$git_metrics\
+[](bg:nord3 fg:nord2)\
+$c\
+$elixir\
+$elm\
+$golang\
+$python\
+$gradle\
+$haskell\
+$java\
+$julia\
+$nodejs\
+$nim\
+$rust\
+$scala\
+[](fg:nord3)
+$status
 """
 
-# Disable the blank line at the start of the prompt
+scan_timeout = 50
+command_timeout = 20000
 add_newline = true
+palette = 'nord'
+
+[palettes.nord]
+nord0 = '#2E3440'
+nord1 = '#3B4252'
+nord2 = '#434C5E'
+nord3 = '#4C566A'
+nord4 = '#D8DEE9'
+nord11 = '#BF616A'
+nord13 = '#EBCB8B'
+nord14 = '#A2BE8A'
 
 [username]
-show_always = false
+disabled = true
 
 [hostname]
 disabled = true
 
-[directory]
-style = "fg:#2e3440 bg:#81a1c1"
-read_only = " "
-format = "[ 󰉋 $path ]($style)[$read_only]($read_only_style)"
-read_only_style = "fg:#2e3440 bold bg:#81a1c1"
-truncation_length = 0
-truncation_symbol = ""
-
-[cmd_duration]
-format = "[ 󰔚 $duration ]($style)"
-style = "fg:#2e3440 bg:#d9dee9"
-
-[time]
-disabled = true
-time_format = "%R" # Hour:Minute Format
-style = "bg:#5e81ac bold"
-format = '[$time ]($style)'
-
-[character]
+[os]
+format = '[ $symbol ]($style)'
+style = 'bg:nord0 fg:nord4'
 disabled = false
-success_symbol = "[ 󱞩](bold green)"
-error_symbol = "[ 󱞩](bold red)"
-vimcmd_symbol = "[  󱞩](bold green)"
+
+[directory]
+truncation_length = 1
+truncate_to_repo = true
+format = '[ $path ]($style)[$read_only]($read_only_style)'
+style = 'bg:nord1 fg:nord4'
+disabled = false
+read_only = ' 󰌾 '
+read_only_style = 'bg:nord1 fg:nord11'
+truncation_symbol = ''
 
 [git_branch]
-format = "[ $symbol$branch(:$remote_branch) ]($style)"
-symbol = "󰘬 "
-style = "fg:#2e3440 bg:#88c0d0"
+symbol = ''
+style = 'bg:nord2 fg:nord4'
+format = '[ $symbol $branch ]($style)'
 
 [git_status]
+style = 'bg:nord2 fg:nord4'
+format = '[$all_status$ahead_behind ]($style)'
 ahead = '${count}'
 diverged = '${ahead_count}${behind_count}'
 behind = '${count}'
 
-[git_commit]
-
-[git_state]
-
 [git_metrics]
+added_style = 'bg:nord2 fg:nord14'
+deleted_style = 'bg:nord2 fg:nord11'
+format = '[+$added ]($added_style)[-$deleted ]($deleted_style)'
+disabled = false
+
+[status]
+format = '[ $symbol ]($style)'
+style = "bold"
+symbol = '[](fg:nord11)'
+success_symbol = '[](fg:nord14)'
+not_executable_symbol = '[🛇](fg:nord11)'
+not_found_symbol = '[󰍉](fg:nord11)'
+sigint_symbol = '[](fg:nord13)'
+signal_symbol = '[](fg:nord11)'
+disabled = false
+
+[os.symbols]
+Alpaquita = ' '
+Alpine = ' '
+Amazon = ' '
+Android = ' '
+Arch = ' '
+Artix = ' '
+CentOS = ' '
+Debian = ' '
+DragonFly = ' '
+Emscripten = ' '
+EndeavourOS = ' '
+Fedora = ' '
+FreeBSD = ' '
+Garuda = '󰛓 '
+Gentoo = ' '
+HardenedBSD = '󰞌 '
+Illumos = '󰈸 '
+Linux = ' '
+Mabox = ' '
+Macos = ' '
+Manjaro = ' '
+Mariner = ' '
+MidnightBSD = ' '
+Mint = ' '
+NetBSD = ' '
+NixOS = ' '
+OpenBSD = '󰈺 '
+openSUSE = ' '
+OracleLinux = '󰌷 '
+Pop = ' '
+Raspbian = ' '
+Redhat = ' '
+RedHatEnterprise = ' '
+Redox = '󰀘 '
+Solus = '󰠳 '
+SUSE = ' '
+Ubuntu = ' '
+Unknown = ' '
+Windows = '󰍲 '
 
 [java]
-symbol = " "
-style = "fg:#2e3440 bg:#8fbcbb"
+symbol = ' '
+style = 'bg:nord3 fg:nord4'
 format = '[ $symbol ($version) ]($style)'
 
 [nodejs]
-symbol = ""
-style = "fg:#2e3440 bg:#8fbcbb"
+symbol = ''
+style = 'bg:nord3 fg:nord4'
 format = '[ $symbol ($version) ]($style)'
 
+[python]
+symbol = ' '
+style = 'bg:nord3 fg:nord4'
+format = '[ $symbol ($version) (\($virtualenv\)) ]($style)'
 

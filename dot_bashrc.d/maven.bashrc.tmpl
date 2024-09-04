@@ -9,8 +9,17 @@ if hash mvn 2>/dev/null; then
     alias mvnd='m -Dmaven.test.skip -Dmaven.javadoc.skip=true deploy -P profile-nexus'
     alias mvni='m -Dmaven.test.skip -Dmaven.javadoc.skip=true clean install'
 
-    mbump() {
-      mvn versions:set -DnewVersion=$1 -DgenerateBackupPoms=false
+    function mbump() {
+      if [ $# -eq 0 ]; then
+        echo "Usage: mbump <version> (means -SNAPSHOT) or mbump <version> <kind> (kind is R or S)"
+      else
+        if [ $# -gt 1 ] && [ "$2" = "R" ]; then
+          kind="RELEASE"
+        else
+          kind="SNAPSHOT"
+        fi
+        mvn versions:set -DgenerateBackupPoms=false -DnewVersion="$1-$kind"
+      fi
     }
 
     # copy maven artifact

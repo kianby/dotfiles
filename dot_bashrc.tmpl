@@ -92,13 +92,34 @@ fi
 alias cdd='cd {{ .deploydir }}'
 export cdd={{ .deploydir }}
 
-sshloop() {
-  while :
-  do
-    ssh $1
-    echo "Reconnection in 5 seconds"
-    sleep 5
-  done
+# ---------------------------------------------------------------------------
+#  TMUX
+# ---------------------------------------------------------------------------
+
+# Function to set tmux window title
+function set_tmux_title {
+    if [ -n "$TMUX" ]; then
+        tmux rename-window "$1"
+    fi
+}
+
+# SSH wrapper to change the tmux title locally
+function ssh() {
+    if [ -n "$TMUX" ]; then
+        # Save the original tmux window title
+        original_title=$(tmux display-message -p '#W')
+    fi
+    
+    # Change tmux title before connecting
+    set_tmux_title "SSH: $1"
+    
+    # Run the actual ssh command with all arguments
+    command ssh "$@"
+    
+    # Restore the original tmux window title after disconnecting
+    if [ -n "$TMUX" ]; then
+        set_tmux_title "$original_title"
+    fi
 }
 
 # ---------------------------------------------------------------------------

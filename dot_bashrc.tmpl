@@ -119,6 +119,7 @@ function ssh() {
     # Restore the original tmux window title after disconnecting
     if [ -n "$TMUX" ]; then
         set_tmux_title "$original_title"
+        tmux set-window-option automatic-rename on
     fi
 }
 

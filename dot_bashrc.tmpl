@@ -111,7 +111,7 @@ function ssh() {
     fi
     
     # Change tmux title before connecting
-    set_tmux_title "SSH: $1"
+    set_tmux_title "SSH $1"
     
     # Run the actual ssh command with all arguments
     command ssh "$@"
@@ -122,6 +122,11 @@ function ssh() {
         tmux set-window-option automatic-rename on
     fi
 }
+
+export FAVORITE_COMMAND1="{{ .tmux_favorite1 }}"
+export FAVORITE_COMMAND2="{{ .tmux_favorite2 }}"
+export FAVORITE_COMMAND3="{{ .tmux_favorite3 }}"
+export FAVORITE_COMMAND4="{{ .tmux_favorite4 }}"
 
 # ---------------------------------------------------------------------------
 #  COMPLETIONS

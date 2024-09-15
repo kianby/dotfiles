@@ -49,12 +49,17 @@ alias vi=$EDITOR
 #  ALIASES
 # ---------------------------------------------------------------------------
 
-if hash exa 2>/dev/null; then
+if hash lsd 2>/dev/null; then
+  alias ls="lsd"
+  alias ll="ls -l"
+  alias la="ls -la"
+elif hash exa 2>/dev/null; then
   alias ll="exa --long --group-directories-first --classify --git"
   alias la="ll --all"
 else
   alias ll="ls -lv --group-directories-first --ignore=.." # show long listing but no hidden dotfiles except "."
   alias la='ls -lav' 
+  test -r "~/.dir_colors" && eval $(dircolors ~/.dir_colors)
 fi
 
 alias rm='rm --interactive --verbose'
@@ -221,4 +226,3 @@ else
   fi
 fi
 
-test -r "~/.dir_colors" && eval $(dircolors ~/.dir_colors)

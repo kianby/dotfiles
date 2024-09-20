@@ -182,9 +182,6 @@ if [ -d "$HOME/.hishtory/" ]; then
   hishtory config-set displayed-columns CWD Command
 fi
 
-# enable history
-set -o history
-
 # ---------------------------------------------------------------------------
 #  PROMPT
 # ---------------------------------------------------------------------------
@@ -226,3 +223,5 @@ else
   fi
 fi
 
+# enable history
+set -o history

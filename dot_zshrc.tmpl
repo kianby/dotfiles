@@ -68,7 +68,13 @@ plugins=(fzf sdk nodenv)
 
 source $ZSH/oh-my-zsh.sh
 
-# User configuration
+
+# ---------------------------------------------------------------------------
+#  User configuration
+# ---------------------------------------------------------------------------
+
+autoload -U compinit
+compinit
 
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
@@ -87,6 +93,7 @@ fi
 
 alias cdd='cd {{ .deploydir }}'
 export cdd={{ .deploydir }}
+
 
 # ---------------------------------------------------------------------------
 #  TMUX
@@ -124,6 +131,7 @@ export FAVORITE_COMMAND2="{{ .tmux_favorite2 }}"
 export FAVORITE_COMMAND3="{{ .tmux_favorite3 }}"
 export FAVORITE_COMMAND4="{{ .tmux_favorite4 }}"
 
+
 # ---------------------------------------------------------------------------
 #  FZF
 # ---------------------------------------------------------------------------
@@ -142,11 +150,20 @@ if command -v fzf &>/dev/null; then
     }
 fi
 
+
+# ---------------------------------------------------------------------------
+#  SDKMAN
+# ---------------------------------------------------------------------------
+
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+
+
 # ---------------------------------------------------------------------------
 #  MAVEN
 # ---------------------------------------------------------------------------
 
-if hash mvn 2>/dev/null; then
+if command -v mvn &>/dev/null; then
     if [ -f "{{ .java_truststore_file }}" ]; then
         alias m='mvn -Djavax.net.ssl.trustStore={{ .java_truststore_file }} -Djavax.net.ssl.trustStorePassword={{ .java_truststore_password }}'
     else

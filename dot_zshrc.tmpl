@@ -64,13 +64,11 @@ ZSH_THEME="spaceship"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(fzf)
+plugins=(fzf sdk nodenv)
 
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
-
-# export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
@@ -82,19 +80,95 @@ source $ZSH/oh-my-zsh.sh
 #   export EDITOR='nvim'
 # fi
 
-# Compilation flags
-# export ARCHFLAGS="-arch $(uname -m)"
 
-# Set personal aliases, overriding those provided by Oh My Zsh libs,
-# plugins, and themes. Aliases can be placed here, though Oh My Zsh
-# users are encouraged to define aliases within a top-level file in
-# the $ZSH_CUSTOM folder, with .zsh extension. Examples:
-# - $ZSH_CUSTOM/aliases.zsh
-# - $ZSH_CUSTOM/macos.zsh
-# For a full list of active aliases, run `alias`.
-#
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
+if command -v tig &>/dev/null; then
+  alias tiga='tig --all'
+fi
 
+alias cdd='cd {{ .deploydir }}'
+export cdd={{ .deploydir }}
 
+# ---------------------------------------------------------------------------
+#  TMUX
+# ---------------------------------------------------------------------------
+
+# Function to set tmux window title
+function set_tmux_title {
+    if [[ -n "$TMUX" ]]; then
+        tmux rename-window "$1"
+    fi
+}
+
+# SSH wrapper to change the tmux title locally
+function ssh() {
+    if [[ -n "$TMUX" ]]; then
+        # Save the original tmux window title
+        original_title=$(tmux display-message -p '#W')
+    fi
+
+    # Change tmux title before connecting
+    set_tmux_title "SSH $1"
+
+    # Run the actual ssh command with all arguments
+    command ssh "$@"
+
+    # Restore the original tmux window title after disconnecting
+    if [[ -n "$TMUX" ]]; then
+        set_tmux_title "$original_title"
+        tmux set-window-option automatic-rename on
+    fi
+}
+
+export FAVORITE_COMMAND1="{{ .tmux_favorite1 }}"
+export FAVORITE_COMMAND2="{{ .tmux_favorite2 }}"
+export FAVORITE_COMMAND3="{{ .tmux_favorite3 }}"
+export FAVORITE_COMMAND4="{{ .tmux_favorite4 }}"
+
+# ---------------------------------------------------------------------------
+#  FZF
+# ---------------------------------------------------------------------------
+
+if command -v fzf &>/dev/null; then
+
+    __fzf_cd__ () {
+        local cmd dir
+        cmd="${FZF_ALT_C_COMMAND:-"command find -L . -mindepth 1 \\( -path '*/\\.*' -o -fstype 'sysfs' -o -fstype 'devfs' -o -fstype 'devtmpfs' -o -fstype 'proc' \\) -prune -o -type d -print 2> /dev/null | cut -b3-"}"
+        dir=$(eval "$cmd" | FZF_DEFAULT_OPTS="--height ${FZF_TMUX_HEIGHT:-40%} --reverse $FZF_DEFAULT_OPTS $FZF_ALT_C_OPTS" $(__fzfcmd) +m) && printf 'cd %q' "$dir"
+    }
+
+    # quickly find a project
+    p(){
+        cd {{ .projectdir }} &&  `__fzf_cd__` && [[ -d ".git" ]] && git fetch 
+    }
+fi
+
+# ---------------------------------------------------------------------------
+#  MAVEN
+# ---------------------------------------------------------------------------
+
+if hash mvn 2>/dev/null; then
+    if [ -f "{{ .java_truststore_file }}" ]; then
+        alias m='mvn -Djavax.net.ssl.trustStore={{ .java_truststore_file }} -Djavax.net.ssl.trustStorePassword={{ .java_truststore_password }}'
+    else
+        alias m='mvn'
+    fi
+    alias mvnp='m -Dmaven.test.skip -Dmaven.javadoc.skip=true -DskipMunitTests clean package'
+    alias mvnd='m -Dmaven.test.skip -Dmaven.javadoc.skip=true deploy -P profile-nexus'
+    alias mvni='m -Dmaven.test.skip -Dmaven.javadoc.skip=true clean install'
+    
+    function mbump() {
+        if [ $# -eq 0 ]; then
+            echo "Usage: mbump <version> (means -SNAPSHOT) or mbump <version> <kind> (kind is R or S)"
+        else
+            if [ $# -gt 1 ] && [ "$2" = "R" ]; then
+                kind="RELEASE"
+            else
+                kind="SNAPSHOT"
+            fi
+            mvn versions:set -DgenerateBackupPoms=false -DnewVersion="$1-$kind"
+        fi
+    }
+
+    # copy maven artifact
+    alias d="python3 ~/.local/bin/deploy.py '$cdd'"
+fi

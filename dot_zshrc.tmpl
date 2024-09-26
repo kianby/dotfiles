@@ -64,7 +64,7 @@ ZSH_THEME="spaceship"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(fzf sdk nodenv)
+plugins=(fzf sdk nodenv zsh-autosuggestions zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -73,19 +73,9 @@ source $ZSH/oh-my-zsh.sh
 #  User configuration
 # ---------------------------------------------------------------------------
 
-autoload -U compinit
-compinit
-
-# You may need to manually set your language environment
-# export LANG=en_US.UTF-8
-
-# Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='nvim'
-# fi
-
+if [[ -f "$HOME/.zshrc.local" ]]; then
+  source "$HOME/.zshrc.local"
+fi
 
 if command -v tig &>/dev/null; then
   alias tiga='tig --all'
@@ -94,6 +84,24 @@ fi
 alias cdd='cd {{ .deploydir }}'
 export cdd={{ .deploydir }}
 
+# ---------------------------------------------------------------------------
+#  EDITOR
+# ---------------------------------------------------------------------------
+
+if hash nvim 2>/dev/null; then
+  export EDITOR=nvim
+elif hash vim 2>/dev/null; then
+  export EDITOR=vim
+elif hash vi 2>/dev/null; then 
+  export EDITOR=vi
+else
+  export EDITOR=nano
+fi
+
+export SVN_EDITOR=$EDITOR
+export GIT_EDITOR=$EDITOR
+export VISUAL=$EDITOR
+alias vi=$EDITOR
 
 # ---------------------------------------------------------------------------
 #  TMUX

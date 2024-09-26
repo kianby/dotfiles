@@ -70,22 +70,46 @@ source $ZSH/oh-my-zsh.sh
 
 
 # ---------------------------------------------------------------------------
-#  User configuration
+#  USER CONFIGURATION
 # ---------------------------------------------------------------------------
 
 if [[ -f "$HOME/.zshrc.local" ]]; then
   source "$HOME/.zshrc.local"
 fi
 
-if command -v tig &>/dev/null; then
-  alias tiga='tig --all'
-fi
-
 alias cdd='cd {{ .deploydir }}'
 export cdd={{ .deploydir }}
 
 # ---------------------------------------------------------------------------
-#  EDITOR
+#  History
+# ---------------------------------------------------------------------------
+
+# set the maximum number of lines to be saved in the history file
+export HISTSIZE="50000"
+export SAVEHIST="$HISTSIZE"
+
+# append new history entries to the history file
+setopt APPEND_HISTORY
+
+# save each command to the history file as soon as it is executed
+setopt INC_APPEND_HISTORY
+
+# ignore recording duplicate consecutive commands in the history
+setopt HIST_IGNORE_DUPS
+
+# ignore commands that start with a space in the history
+setopt HIST_IGNORE_SPACE
+
+# ---------------------------------------------------------------------------
+#  Git
+# ---------------------------------------------------------------------------
+
+if command -v tig &>/dev/null; then
+  alias tiga='tig --all'
+fi
+
+# ---------------------------------------------------------------------------
+#  Editor
 # ---------------------------------------------------------------------------
 
 if hash nvim 2>/dev/null; then
@@ -104,7 +128,7 @@ export VISUAL=$EDITOR
 alias vi=$EDITOR
 
 # ---------------------------------------------------------------------------
-#  TMUX
+#  Tmux
 # ---------------------------------------------------------------------------
 
 # Function to set tmux window title
@@ -141,7 +165,7 @@ export FAVORITE_COMMAND4="{{ .tmux_favorite4 }}"
 
 
 # ---------------------------------------------------------------------------
-#  FZF
+#  Fzf
 # ---------------------------------------------------------------------------
 
 if command -v fzf &>/dev/null; then
@@ -160,7 +184,7 @@ fi
 
 
 # ---------------------------------------------------------------------------
-#  SDKMAN
+#  Sdkman
 # ---------------------------------------------------------------------------
 
 export SDKMAN_DIR="$HOME/.sdkman"
@@ -168,7 +192,7 @@ export SDKMAN_DIR="$HOME/.sdkman"
 
 
 # ---------------------------------------------------------------------------
-#  MAVEN
+#  Maven
 # ---------------------------------------------------------------------------
 
 if command -v mvn &>/dev/null; then

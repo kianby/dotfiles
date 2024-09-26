@@ -73,12 +73,17 @@ source $ZSH/oh-my-zsh.sh
 #  USER CONFIGURATION
 # ---------------------------------------------------------------------------
 
-if [[ -f "$HOME/.zshrc.local" ]]; then
-  source "$HOME/.zshrc.local"
-fi
+export FAVORITE_COMMAND1="{{ .tmux_favorite1 }}"
+export FAVORITE_COMMAND2="{{ .tmux_favorite2 }}"
+export FAVORITE_COMMAND3="{{ .tmux_favorite3 }}"
+export FAVORITE_COMMAND4="{{ .tmux_favorite4 }}"
 
 alias cdd='cd {{ .deploydir }}'
 export cdd={{ .deploydir }}
+
+if [[ -f "$HOME/.zshrc.local" ]]; then
+  source "$HOME/.zshrc.local"
+fi
 
 # ---------------------------------------------------------------------------
 #  History
@@ -157,12 +162,6 @@ function ssh() {
         tmux set-window-option automatic-rename on
     fi
 }
-
-export FAVORITE_COMMAND1="{{ .tmux_favorite1 }}"
-export FAVORITE_COMMAND2="{{ .tmux_favorite2 }}"
-export FAVORITE_COMMAND3="{{ .tmux_favorite3 }}"
-export FAVORITE_COMMAND4="{{ .tmux_favorite4 }}"
-
 
 # ---------------------------------------------------------------------------
 #  Fzf

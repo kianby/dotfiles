@@ -74,21 +74,11 @@ fi
 #  History
 # ---------------------------------------------------------------------------
 
-# set the maximum number of lines to be saved in the history file
-export HISTSIZE="50000"
-export SAVEHIST="$HISTSIZE"
-
-# append new history entries to the history file
+# Allow multiple sessions to append to one Zsh command history.
 setopt APPEND_HISTORY
 
-# save each command to the history file as soon as it is executed
+# Write to the history file immediately, not when the shell exits.
 setopt INC_APPEND_HISTORY
-
-# ignore recording duplicate consecutive commands in the history
-setopt HIST_IGNORE_DUPS
-
-# ignore commands that start with a space in the history
-setopt HIST_IGNORE_SPACE
 
 # ---------------------------------------------------------------------------
 #  Git

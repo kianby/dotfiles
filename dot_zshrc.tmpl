@@ -7,6 +7,10 @@ autoload -Uz _zi
 (( ${+_comps} )) && _comps[zi]=_zi
 # end of zi init
 
+# Vi mode
+export KEYTIMEOUT=1
+bindkey -v
+
 # If you come from bash you might have to change your $PATH.
 export PATH=$HOME/bin:$HOME/.local/bin:$PATH
 

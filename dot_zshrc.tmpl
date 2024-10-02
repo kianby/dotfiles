@@ -119,16 +119,14 @@ zi snippet OMZP::tmux
 
 if command -v fzf &>/dev/null; then
 
-    __fzf_cd__ () {
-        local cmd dir
-        cmd="${FZF_ALT_C_COMMAND:-"command find -L . -mindepth 1 \\( -path '*/\\.*' -o -fstype 'sysfs' -o -fstype 'devfs' -o -fstype 'devtmpfs' -o -fstype 'proc' \\) -prune -o -type d -print 2> /dev/null | cut -b3-"}"
-        dir=$(eval "$cmd" | FZF_DEFAULT_OPTS="--height ${FZF_TMUX_HEIGHT:-40%} --reverse $FZF_DEFAULT_OPTS $FZF_ALT_C_OPTS" $(__fzfcmd) +m) && printf 'cd %q' "$dir"
-    }
+  change_path_and_find_project() {        
+      cd {{ .projectdir }}      
+      zle fzf-cd-widget
+      zle reset-prompt
+  }
 
-    # quickly find a project
-    p(){
-        cd {{ .projectdir }} &&  `__fzf_cd__` && [[ -d ".git" ]] && git fetch 
-    }
+  zle -N change_path_and_find_project
+  bindkey '^P' change_path_and_find_project
 fi
 
 

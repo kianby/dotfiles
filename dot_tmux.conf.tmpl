@@ -120,14 +120,8 @@ bind-key M-4 send-keys "$FAVORITE_COMMAND4"
 unbind r
 bind r source-file ~/.tmux.conf \; display-message "config reloaded!"
 
-# plugin last_command_output
-set -g @command-capture-prompt-pattern '$ ' 
-set -g @command-capture-editor-cmd 'gedit -'
-
 # Plugins
 set -g @plugin 'tmux-plugins/tpm'
-set -g @plugin 'laktak/extrakto'
-set -g @plugin 'artemave/tmux_capture_last_command_output'
 set -g @plugin "arcticicestudio/nord-tmux"
 
 # run tpm

@@ -40,6 +40,11 @@ export FAVORITE_COMMAND4="{{ .tmux_favorite4 }}"
 alias cdd='cd {{ .deploydir }}'
 export cdd={{ .deploydir }}
 
+alias rm='rm --interactive --verbose'
+alias mv='mv --interactive --verbose'
+alias cp='cp --verbose --interactive'
+alias dmesg='dmesg -T'
+alias grep='grep --color'
 
 # ---------------------------------------------------------------------------
 #  History
@@ -81,6 +86,15 @@ alias vi=$EDITOR
 # ---------------------------------------------------------------------------
 #  Tmux
 # ---------------------------------------------------------------------------
+
+if command -v tmux &>/dev/null; then
+  alias ta='tmux attach'
+  
+  alias tkill="for s in \$(tmux list-sessions | awk -F ':' '{print \$1}' | fzf); do
+    tmux kill-session -t \$s;
+  done"
+fi
+
 
 # Function to set tmux window title
 function set_tmux_title {
@@ -171,4 +185,16 @@ if command -v mvn &>/dev/null; then
 
     # copy maven artifact
     alias d="python3 ~/.local/bin/deploy.py '$cdd'"
+fi
+
+# ---------------------------------------------------------------------------
+#  Nix
+# ---------------------------------------------------------------------------
+
+if command nix-env &>/dev/null; then
+  alias nix-update='nix-channel --update && nix-env -u'
+
+  nix-search() {
+    nix-env -qa --description ".*$1.*"
+  }
 fi

@@ -64,6 +64,15 @@ if command -v tig &>/dev/null; then
   alias tiga='tig --all'
 fi
 
+# Function to run after every 'cd' command
+chpwd() {
+  # Check if the current directory is a Git repository
+  if git rev-parse --is-inside-work-tree 2>/dev/null; then
+    echo "Fetching latest changes from remote..."
+    git fetch
+  fi
+}
+
 # ---------------------------------------------------------------------------
 #  Editor
 # ---------------------------------------------------------------------------

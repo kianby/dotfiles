@@ -200,7 +200,9 @@ fi
 #  Nix
 # ---------------------------------------------------------------------------
 
-if command nix-env &>/dev/null; then
+if [ -e $HOME/.nix-profile/etc/profile.d/nix.sh ]; then 
+  . $HOME/.nix-profile/etc/profile.d/nix.sh;
+
   alias nix-update='nix-channel --update && nix-env -u'
 
   nix-search() {

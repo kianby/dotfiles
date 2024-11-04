@@ -24,10 +24,14 @@ zi snippet OMZL::directories.zsh
 # apply workaround for refresh: https://github.com/spaceship-prompt/spaceship-prompt/issues/1193
 zi light spaceship-prompt/spaceship-prompt
 
+zi light ptavares/zsh-sdkman
 zi light zsh-users/zsh-autosuggestions
 zi light zsh-users/zsh-syntax-highlighting
-zi light ptavares/zsh-sdkman
-zi light mattberther/zsh-nodenv
+
+zi is-snippet wait lucid for \
+  OMZP::fzf \
+    has'nodenv' \
+  OMZP::nodenv
 
 export FAVORITE_COMMAND1="{{ .tmux_favorite1 }}"
 export FAVORITE_COMMAND2="{{ .tmux_favorite2 }}"

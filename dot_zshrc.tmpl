@@ -53,11 +53,9 @@ alias grep='grep --color'
 #  History
 # ---------------------------------------------------------------------------
 
-# Allow multiple sessions to append to one Zsh command history.
-setopt APPEND_HISTORY
-
-# Write to the history file immediately, not when the shell exits.
-setopt INC_APPEND_HISTORY
+setopt APPEND_HISTORY       # Append commands to the history file when a session ends
+unsetopt INC_APPEND_HISTORY # Avoid appending commands immediately after execution
+unsetopt SHARE_HISTORY      # Keep history isolated to each session during runtime
 
 # ---------------------------------------------------------------------------
 #  Git

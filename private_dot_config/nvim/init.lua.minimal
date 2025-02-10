@@ -51,6 +51,7 @@ require("lazy").setup({
   checker = { enabled = true },
 })
 
-vim.api.nvim_set_keymap("n", "<C-f>", [[<Cmd>lua require"fzf-lua".files()<CR>]], {})
-vim.api.nvim_set_keymap("n", "<C-g>", [[<Cmd>lua require"fzf-lua".grep_project()<CR>]], {})
-vim.api.nvim_set_keymap("n", "<C-\\>", [[<Cmd>lua require"fzf-lua".buffers()<CR>]], {})
+vim.api.nvim_set_keymap("n", "<SPACE><C-f>", [[<Cmd>lua require"fzf-lua".files()<CR>]], {})
+vim.api.nvim_set_keymap("n", "<SPACE><C-g>", [[<Cmd>lua require"fzf-lua".grep_project()<CR>]], {})
+vim.api.nvim_set_keymap("n", "<SPACE><C-\\>", [[<Cmd>lua require"fzf-lua".buffers()<CR>]], {})
+

@@ -36,13 +36,31 @@ require("lazy").setup({
       end,
     },
     {
-      "ibhagwan/fzf-lua",
-      -- optional for icon support
-      dependencies = { "nvim-tree/nvim-web-devicons" },
-      -- or if using mini.icons/mini.nvim
-      -- dependencies = { "echasnovski/mini.icons" },
-      opts = {}
-    }
+      "folke/snacks.nvim",
+      ---@type snacks.Config
+      opts = {
+        picker = {},
+	explorer = {},
+	zen = {},
+	terminal = {}
+      },
+      keys = {
+        -- explore and find
+        { "<leader><space>", function() Snacks.picker.smart() end, desc = "Smart Find Files" },
+	{ "<leader>,", function() Snacks.picker.buffers() end, desc = "Buffers" },
+        { "<leader>/", function() Snacks.picker.grep() end, desc = "Grep" },
+        { "<leader>:", function() Snacks.picker.command_history() end, desc = "Command History" },
+        { "<leader>n", function() Snacks.picker.notifications() end, desc = "Notification History" },
+        { "<leader>e", function() Snacks.explorer() end, desc = "File Explorer" },
+	{ "<leader>fp", function() Snacks.picker.projects() end, desc = "Projects" },
+        { "<leader>fr", function() Snacks.picker.recent() end, desc = "Recent" },
+	-- zen mode
+        { "<leader>ze", function() Snacks.zen.zen() end, desc = "Zen" },
+        { "<leader>zz", function() Snacks.zen.zoom() end, desc = "Zoom" },
+	-- terminal
+        { "<leader>tt", function() Snacks.terminal.get() end, desc = "Terminal" },
+      }
+    },
   },
   -- Configure any other settings here. See the documentation for more details.
   -- colorscheme that will be used when installing plugins.
@@ -50,8 +68,4 @@ require("lazy").setup({
   -- automatically check for plugin updates
   checker = { enabled = true },
 })
-
-vim.api.nvim_set_keymap("n", "<SPACE><C-f>", [[<Cmd>lua require"fzf-lua".files()<CR>]], {})
-vim.api.nvim_set_keymap("n", "<SPACE><C-g>", [[<Cmd>lua require"fzf-lua".grep_project()<CR>]], {})
-vim.api.nvim_set_keymap("n", "<SPACE><C-\\>", [[<Cmd>lua require"fzf-lua".buffers()<CR>]], {})
 
